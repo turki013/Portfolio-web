@@ -10,7 +10,6 @@
 ![GitHub forks](https://img.shields.io/github/forks/turki013/Bank-System?style=social)
 ![GitHub issues](https://img.shields.io/github/issues/turki013/Bank-System)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/turki013/portfolio-web)
-![GitHub last commit](https://img.shields.io/github/last-commit/turki013/portfolio-web)
 ![GitHub repo size](https://img.shields.io/github/repo-size/turki013/portfolio-web)
 ![License](https://img.shields.io/github/license/turki013/portfolio-web)
 
