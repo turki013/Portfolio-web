@@ -32,6 +32,7 @@ header {
     display: flex;
     list-style-type: none;
     gap: 2rem;
+    font-size: 1rem;
 }
 
 .navigation a {
@@ -40,7 +41,7 @@ header {
 }
 
 .navigation a:hover {
-    color: orange;
+    color: rgb(2, 217, 217)
 }
 
 hr {
@@ -169,12 +170,12 @@ hr {
 .worksContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: left;
+    justify-content: center; 
+    align-items: center;     
     margin: 4rem auto;
     max-width: 1200px;
-
 }
+
 
 .projectTitle {
     display: flex;
@@ -191,27 +192,74 @@ hr {
 
 .works ul {
     display: flex;
+    gap: 3rem; 
     list-style-type: none;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; 
 }
+
+  
 .works li {
     border-radius: 15px;
-    background-color: rgba(57, 62, 70, 0.5);
-    backdrop-filter: blur(3px);
-    padding: 1rem 4rem;
-}
+    background-color: rgba(41, 43, 49, 0.3);
+    backdrop-filter: blur(6px);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
 
 .works li img {
     width: 200px;
     height: 200px;
     object-fit: contain;
-    transition: transform 0.2s;
+    transition: transform 0.4s;
 }
 
 .works li :hover {
-    transform: scale(1.4);
+    transform: scale(1.1);
+    transition: 0.3s ease-in-out;
 }
+
+.img-hover-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 15px;
+  }
+  
+.img-hover-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: 0.3s ease;
+  }
+  
+.img-hover-container:hover img {
+    transform: scale(1.1);
+  }
+  
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+  }
+  
+.img-hover-container:hover .overlay-text {
+    opacity: 1;
+  }
+  
 
 .contactContainer {
     display: flex;
@@ -265,6 +313,7 @@ hr {
 
 .socialMedia a :hover {
     transform: scale(1.2);
+    transition: 0.3s ease-in-out;
 }
 
 .email {
@@ -286,6 +335,7 @@ hr {
 .email a :hover {
     color: aliceblue;
     transform: scale(1.1);
+    transition: 0.3s ease-in-out;
 }
 
 footer {
