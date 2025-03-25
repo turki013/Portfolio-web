@@ -6,7 +6,13 @@
 ![Responsive](https://img.shields.io/badge/Responsive-Yes-brightgreen?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Live-brightgreen?style=flat-square&logo=vercel&logoColor=white)
 ![Last Update](https://img.shields.io/badge/Last_Update-Today-blue?style=flat-square&logo=github)
-![License](https://img.shields.io/badge/license-not%20specified-lightgrey?style=flat-square)
+![GitHub Repo stars](https://img.shields.io/github/stars/turki013/Bank-System?style=social)
+![GitHub forks](https://img.shields.io/github/forks/turki013/Bank-System?style=social)
+![GitHub issues](https://img.shields.io/github/issues/turki013/Bank-System)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/turki013/portfolio-web)
+![GitHub last commit](https://img.shields.io/github/last-commit/turki013/portfolio-web)
+![GitHub repo size](https://img.shields.io/github/repo-size/turki013/portfolio-web)
+![License](https://img.shields.io/github/license/turki013/portfolio-web)
 
 ## 🖥️ About the Project
 
