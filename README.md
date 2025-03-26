@@ -15,7 +15,7 @@
 
 ## 🖥️ About the Project
 
-This is a **personal portfolio website** designed to showcase my projects, resume, and contact information. It's built using **HTML**, **CSS**, and minimal **JavaScript** to enhance interactivity and user experience.
+This is a **personal portfolio website** designed to showcase my projects, resume, and contact information. It's built using **HTML**, **CSS**, to enhance interactivity and user experience.
 
 # **Translate**
 [<img src="https://flagcdn.com/w40/sa.png" height="20"/>](Docs/README.ar.md)
