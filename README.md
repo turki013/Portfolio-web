@@ -12,6 +12,7 @@
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/turki013/portfolio-web)
 ![GitHub repo size](https://img.shields.io/github/repo-size/turki013/portfolio-web)
 ![License](https://img.shields.io/github/license/turki013/portfolio-web)
+![release](https://img.shields.io/badge/release-v1.2.0-blue)
 
 ## 🖥️ About the Project
 
