@@ -45,7 +45,7 @@ This is a **personal portfolio website** designed to showcase my projects, resum
 ## 📄 Live Preview
 
 You can preview the site live at:
-[https://turki013.github.io/Portfolio-web](https://turki013.github.io/Portfolio-web)
+[Link](https://www.data-student.software)
 
 ## 📬 Contact
 
