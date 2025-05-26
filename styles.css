@@ -154,6 +154,48 @@ hr {
     color:rgba(238, 238, 238, 0.723);
 }
     
+.skilltitle {
+  text-align: center;
+  font-size: 3rem;
+  margin: 4rem auto;
+  color: #00bcd4;
+}
+
+.skilltitle {
+  text-align: center;
+  font-size: 4rem;
+  margin: 4rem auto;
+  color: rgba(11, 170, 170, 0.789); 
+}
+
+.skillsname {
+    color:rgba(204, 224, 224, 0.789);
+}
+
+.skillsPar {
+  max-width: 850px;
+  margin: 2rem auto 0 auto;
+  padding: 0 1rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(238, 238, 238, 0.9);
+  text-align: left;
+  font-weight: 500;
+}
+
+.skils-img {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 2rem auto 0 auto;
+  padding: 0 1rem;
+}
+
+.skils-img :hover {
+    transform: scale(1.3);
+    transition: 0.3s ease-in-out;
+}
 
 .works {
     background-image: url(assets/svg/background.svg);
@@ -379,6 +421,12 @@ footer {
     .aboutTitle {
       font-size: 2rem;
     }
+
+    .skilltitle,
+    .skillsname {
+      font-size: 2rem;
+    }
+    
     .light {
       width: 60px;
     }
