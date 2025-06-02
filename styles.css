@@ -169,7 +169,7 @@ hr {
 }
 
 .skillsname {
-    color:rgba(204, 224, 224, 0.789);
+    color:rgba(232, 237, 237, 0.789);
 }
 
 .skillsPar {
@@ -187,7 +187,7 @@ hr {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 19px;
   margin: 2rem auto 0 auto;
   padding: 0 1rem;
 }
@@ -234,10 +234,15 @@ hr {
 
 .works ul {
     display: flex;
-    gap: 3rem; 
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1.2rem 2rem;
     list-style-type: none;
-    align-items: center;
-    justify-content: center; 
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 950px;
 }
 
   
@@ -249,8 +254,12 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
+    width: 47%;
+    max-width: 420px;
+    min-width: 250px;
+    margin-bottom: 1.2rem;
+    box-sizing: border-box;
+}
 
 .works li img {
     width: 200px;
@@ -457,4 +466,16 @@ footer {
       margin-right: 0;
     }
   }
+
+@media (max-width: 900px) {
+  .works ul {
+    flex-direction: column;
+    gap: 1.2rem;
+    max-width: 100%;
+  }
+  .works li {
+    width: 95%;
+    max-width: 100%;
+  }
+}
 
