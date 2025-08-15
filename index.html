@@ -10,7 +10,15 @@
     <body>
         <header>
             <img src="svg/TurkiLogo.svg" alt="logo" class="logoWeb"/>  
-            <nav class="navigation">
+            
+            <!-- Hamburger Menu Button -->
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <nav class="navigation" id="navigation">
                 <ul>
                     <li><a href="#aboutMe">About Me</a></li>
                     <li><a href="#MyWorks">My Works</a></li>
@@ -27,11 +35,23 @@
                     <h1 class="name">I’m Turki</h1>
                     <h1 class="title">Data Scientist</h1>
                  <div class="heroBtns">
-                 <a class="hireMe" href="#contactMe">Hire me</a>
-                 <a class="cv" href="Turki_Nasser_Almutairi_cv.pdf" download> Download cv
-                  <img src="svg/download.svg" alt="download button">
+                 <a class="hire-me-link" href="#contactMe">
+                   <button class="hire-me-btn">
+                       <span class="circle1"></span>
+                       <span class="circle2"></span>
+                       <span class="circle3"></span>
+                       <span class="circle4"></span>
+                       <span class="circle5"></span>
+                       <span class="text">Hire me</span>
+                   </button>
                  </a>
-                </a>
+                 <a href="Turki_Nasser_Almutairi_cv.pdf" download>
+                   <button class="Btn">
+                      <svg class="svgIcon" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path></svg>
+                      <span class="icon2"></span>
+                      <span class="tooltip">Download</span>
+                   </button>
+                 </a>
             </div> 
             </div>
             <img src="svg/Hero.svg" alt="download button" class="download-icon"/>
@@ -47,8 +67,14 @@
                     <img src="svg/lightbulb.svg" alt="light" class="light"/>
                     </div>
                     <p class="aboutMePar">
-                        Hey there! I'm Turki Al-Mutairi I'm a Data Science & AI Specialist student, passionate about everything related to machine learning, AI, and data analysis. Currently studying Data science in SEU, I'm always exploring new ways to turn raw data into smart solutions.
-                        I share my journey, insights, and projects on my Telegram channel, "Data Science Student", helping others dive into the world of AI and data science. I enjoy working with Python and Java, building projects, and experimenting with APIs and automation.
+                        Hey there! I'm Turki Al-Mutairi, a Data Science & AI Specialist student passionate about everything related to machine learning, AI, and data analysis. Currently studying Data Science at SEU, I'm always exploring new ways to turn raw data into smart solutions.
+                    </p>
+                    <br>
+                    <p class="aboutMePar">
+                        I share my journey, insights, and projects on my Telegram channel "Data Science Student", helping others dive into the world of AI and data science. I enjoy working with Python and Java, building projects, and experimenting with APIs and automation.
+                    </p>
+                    <br>
+                    <p class="aboutMePar">
                         Always up for a challenge, I'm looking forward to joining hackathons and coding competitions to level up my skills. Feel free to connect with me—I'm always open to interesting discussions and collaborations!
                     </p>
                 </div>  
@@ -92,77 +118,165 @@
 
                     </div>
             </li>
-         </ul>  
+         </ul>
+
+        <!-- New Skills Organization -->
+        <div class="skillSetContainer">
+            <!-- Programming Languages -->
+            <div class="skillContainer">
+                <h3 class="skillTitle">Programming Languages</h3>
+                <div class="skils-img">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="50" alt="python logo"/>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="50" alt="java logo"/>
+                </div>
+            </div>
+
+            <!-- Python & Data Science -->
+            <div class="skillContainer">
+                <h3 class="skillTitle">Python & Data Science</h3>
+                <div class="skils-img">
+                    <img src="https://raw.githubusercontent.com/valohai/ml-logos/master/pandas.svg" height="45" alt="pandas logo"/>
+                    <img src="svg/NumPy_idI8hEnkr2_1.svg" height="45" alt="numpy logo"/>
+                    <img src="https://raw.githubusercontent.com/valohai/ml-logos/master/matplotlib.svg" height="45" alt="matplotlib logo"/>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" height="45" alt="jupyter logo"/>
+                </div>
+            </div>
+
+            <!-- Tools & Technologies -->
+            <div class="skillContainer">
+                <h3 class="skillTitle">Tools & Technologies</h3>
+                <div class="skils-img">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="45" alt="vscode logo" />
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg" height="45" alt="anaconda logo" />
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height="45" alt="github logo" />
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="45" alt="git logo"/>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maya/maya-original.svg" height="45" alt="maya logo"/>
+                </div>
+            </div>
+        </div>  
         <section class="works" id="MyWorks">
             <div class="worksContainer">
                 <div class="projectTitle">
                     <h1 class="ProjectName">My Recent</h1>
                     <h1 class="aboutTitle">works</h1>
                 </div>
-                  <ul>
-                    <li>
-                        <li>
-                            <a href="https://github.com/turki013/Google-stock-by-year" target="_blank">
-                                <div class="img-hover-container">
-                                    <img src="imgs/Google Stock Prices.png" loading="lazy" alt="Google Stock praise project">
-                                    <div class="overlay-text">View on GitHub</div>
-                                </div>
-                            </a>
-                            <li>
-                            <a href="https://github.com/turki013/Electric-car-sales" target="_blank">
-                                <div class="img-hover-container">
-                                    <img src="imgs/Electric Vehicle Sales & Stock Visualizer.png" loading="lazy" alt="Google Stock praise project">
-                                    <div class="overlay-text">View on GitHub</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://github.com/turki013/Saudi-Schools-DataAnalysis-2025" target="_blank">
-                              <div class="img-hover-container">
-                                <img src="imgs/Dashboard.png" loading="lazy" alt="Dashboard">
-                                <div class="overlay-text">View on GitHub</div>
-                              </div>
-                            </a>
-                        </li> 
-                        <li>
-                            <a href="https://github.com/turki013/Real-vs-AI-Generated" target="_blank">
-                              <div class="img-hover-container">
-                             <img src="imgs/Ai-vs-Real.png" loading="lazy" alt="Ai Vs Real ">
-                             <div class="overlay-text">View on GitHub</div>
-                            </div>  
-                        </a>
-                        </li>
-                        <li>
-                             <a href="https://github.com/turki013/Account-Manager" target="_blank">
-                              <div class="img-hover-container">
-                             <img src="imgs/Account.png" loading="lazy" alt="Account Manager system ">
-                             <div class="overlay-text">View on GitHub</div>
+                <p class="works-description">
+                    Explore my latest data science and development projects, featuring machine learning, 
+                    data analysis, and system development solutions.
+                </p>
+                
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Featured Projects using projects.html design -->
+                    <div class="project-card" data-category="data-analysis">
+                        <img src="imgs/Google Stock Prices.png" alt="Google Stock Analysis" class="project-image">
+                        <div class="project-info">
+                            <h3 class="project-title">Google Stock Analysis</h3>
+                            <p class="project-description">Comprehensive analysis of Google stock price trends using advanced data visualization and statistical modeling techniques to identify market patterns and investment insights.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Pandas</span>
+                                <span class="project-tag">Matplotlib</span>
+                                <span class="project-tag">Data Analysis</span>
                             </div>
-                        </li> 
-                                                
-                     <li>
-                        <a href="https://github.com/turki013/Bank-System" target="_blank">
-                         <div class="img-hover-container">
-                             <img src="imgs/BankSystem.png" loading="lazy" alt="BankSystem">
-                             <div class="overlay-text">View on GitHub</div>
-                            </div>  
+                            <div class="project-links">
+                                <a href="https://github.com/turki013/Google-stock-by-year" target="_blank" class="project-link github-link">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                                <a href="https://github.com/turki013/Google-stock-by-year" target="_blank" class="project-link demo-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                                    </svg>
+                                    Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/turki013/University-System" target="_blank">
-                         <div class="img-hover-container">  
-                             <img src="imgs/UniversitySystem.png" loading="lazy" alt="UniversitySystem">
-                             <div class="overlay-text">View on GitHub</div>
-                            </div>  
-                        </a>
-                    </li>
-                  </ul>
+                    <div class="project-card" data-category="data-analysis">
+                        <img src="imgs/Electric Vehicle Sales & Stock Visualizer.png" alt="Electric Vehicle Analysis" class="project-image">
+                        <div class="project-info">
+                            <h3 class="project-title">Electric Vehicle Market Analysis</h3>
+                            <p class="project-description">Advanced data analysis of electric vehicle market trends with interactive dashboards and advanced visualization techniques for market insights and sales forecasting.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Pandas</span>
+                                <span class="project-tag">Visualization</span>
+                                <span class="project-tag">Forecasting</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/turki013/Electric-car-sales" target="_blank" class="project-link github-link">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                                <a href="https://github.com/turki013/Electric-car-sales" target="_blank" class="project-link demo-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                                    </svg>
+                                    Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="data-analysis">
+                        <img src="imgs/Dashboard.png" alt="Saudi Schools Dashboard" class="project-image">
+                        <div class="project-info">
+                            <h3 class="project-title">Saudi Schools Data Analysis</h3>
+                            <p class="project-description">Interactive data visualization dashboard analyzing Saudi Arabian educational statistics with comprehensive insights into school performance and demographic trends.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Dashboard</span>
+                                <span class="project-tag">Education</span>
+                                <span class="project-tag">Visualization</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/turki013/Saudi-Schools-DataAnalysis-2025" target="_blank" class="project-link github-link">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                                <a href="https://github.com/turki013/Saudi-Schools-DataAnalysis-2025" target="_blank" class="project-link demo-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+                                    </svg>
+                                    Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="projects-action">
+                    <div class="projects-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" id="projects-count">7</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">56+</span>
+                            <span class="stat-label">Stars</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3+</span>
+                            <span class="stat-label">Languages</span>
+                        </div>
+                    </div>
+                    <a href="projects.html" class="view-all-btn">
+                        <span>View All Projects</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24" width="20" height="20">
+                            <path fill="currentColor" d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </section>
-       
-            
-        </section>
+
         <section class="contactContainer" id="contactMe">
             <div class="contactTitle">
                 <h1 class="ProjectName">Contact</h1>
@@ -175,9 +289,38 @@
                 </div>
 
                 <div class="socialMedia">
-                    <a href="https://www.linkedin.com/in/turki-al-mutairi-1486b3244/" target="_blank" 
-                     ><img src="svg/linkedin.svg" alt="LinkedIn logo"
-                    /></a> 
+                    <!-- LinkedIn Interactive Button -->
+                    <div class="tooltip-container">
+                        <div class="tooltip">
+                            <div class="profile">
+                                <div class="user">
+                                    <div class="img">TA</div>
+                                    <div class="details">
+                                        <div class="name">Turki Al-Mutairi</div>
+                                        <div class="username">@turki-al-mutairi</div>
+                                    </div>
+                                </div>
+                                <div class="about">Data Scientist</div>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <a class="icon" href="https://www.linkedin.com/in/turki-al-mutairi-1486b3244/" target="_blank">
+                                <div class="layer">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span class="fab fa-linkedin">
+                                        <svg viewBox="0 0 448 512" height="1em">
+                                            <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="text">LinkedIn</div>
+                            </a>
+                        </div>
+                    </div>
+                    
                     <a href="https://github.com/turki013" target="_blank">       
                     <img src="svg/github.svg"  alt="GitHub logo"/>
                     </a>
@@ -189,6 +332,48 @@
         <footer>
             <p>© 2025 Turki-al-mutairi. All rights reserved.</p>
         </footer>
+
+        <script>
+            // Hamburger Menu Toggle
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const navigation = document.getElementById('navigation');
+
+            hamburgerMenu.addEventListener('click', function() {
+                hamburgerMenu.classList.toggle('active');
+                navigation.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('.navigation a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburgerMenu.classList.remove('active');
+                    navigation.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navigation.contains(event.target);
+                const isClickOnHamburger = hamburgerMenu.contains(event.target);
+                
+                if (!isClickInsideNav && !isClickOnHamburger) {
+                    hamburgerMenu.classList.remove('active');
+                    navigation.classList.remove('active');
+                }
+            });
+
+            // Dynamic project counter
+            document.addEventListener('DOMContentLoaded', function() {
+                // Count project cards in main page
+                const projectCards = document.querySelectorAll('.project-card');
+                const projectCounter = document.getElementById('projects-count');
+                
+                if (projectCounter) {
+                    projectCounter.textContent = projectCards.length;
+                }
+            });
+        </script>
 
         </body>
         </html>
