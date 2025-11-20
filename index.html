@@ -3,377 +3,513 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DS Turki | portfolio </title>
-    <link rel = "stylesheet" href = "styles.css"/>
-    
+    <title>Turki Al-Mutairi | Data Scientist</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-    <body>
-        <header>
-            <img src="svg/TurkiLogo.svg" alt="logo" class="logoWeb"/>  
-            
-            <!-- Hamburger Menu Button -->
-            <div class="hamburger-menu" id="hamburgerMenu">
-                <span></span>
-                <span></span>
-                <span></span>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-text">T</span>urki<span class="dot">.</span>
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-            
-            <nav class="navigation" id="navigation">
-                <ul>
-                    <li><a href="#aboutMe">About Me</a></li>
-                    <li><a href="#MyWorks">My Works</a></li>
-                    <i><a href = "#MySkillset">My Skillset </a></i>
-                    <li><a href="#contactMe">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
-        <hr/>
-
-            <section class="hero">
-                <img class="arrow" src="svg/arrow.svg" alt="arrow">
-                <div class="heroTurki">
-                    <h1 class="name">I’m Turki</h1>
-                    <h1 class="title">Data Scientist</h1>
-                 <div class="heroBtns">
-                 <a class="hire-me-link" href="#contactMe">
-                   <button class="hire-me-btn">
-                       <span class="circle1"></span>
-                       <span class="circle2"></span>
-                       <span class="circle3"></span>
-                       <span class="circle4"></span>
-                       <span class="circle5"></span>
-                       <span class="text">Hire me</span>
-                   </button>
-                 </a>
-                 <a href="Turki_Nasser_Almutairi_cv.pdf" download>
-                   <button class="Btn">
-                      <svg class="svgIcon" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path></svg>
-                      <span class="icon2"></span>
-                      <span class="tooltip">Download</span>
-                   </button>
-                 </a>
-            </div> 
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round">
+                            <i class="fas fa-sun icon sun"></i>
+                            <i class="fas fa-moon icon moon"></i>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
             </div>
-            <img src="svg/Hero.svg" alt="download button" class="download-icon"/>
-        </section>
+        </div>
+    </nav>
 
-            <section class="aboutMe" id="aboutMe">
-                <img src="svg/AboutMe.svg" alt="aboutMe image" class="aboutMeImg"/>
-
-                <div class="textContainer">
-                <div class="textTitle">
-                    <h1 class="aboutName">About</h1>
-                    <h1 class="aboutTitle">Me</h1>
-                    <img src="svg/lightbulb.svg" alt="light" class="light"/>
-                    </div>
-                    <p class="aboutMePar">
-                        Hey there! I'm Turki Al-Mutairi, a Data Science & AI Specialist student passionate about everything related to machine learning, AI, and data analysis. Currently studying Data Science at SEU, I'm always exploring new ways to turn raw data into smart solutions.
-                    </p>
-                    <br>
-                    <p class="aboutMePar">
-                        I share my journey, insights, and projects on my Telegram channel "Data Science Student", helping others dive into the world of AI and data science. I enjoy working with Python and Java, building projects, and experimenting with APIs and automation.
-                    </p>
-                    <br>
-                    <p class="aboutMePar">
-                        Always up for a challenge, I'm looking forward to joining hackathons and coding competitions to level up my skills. Feel free to connect with me—I'm always open to interesting discussions and collaborations!
-                    </p>
-                </div>  
-        </section>
-         <section class="MySkillset" id="MySkillset">
-           
-             <div class="skillset">
-                <div class="skilltxt">
-                 <h1 class="skilltitle">My<span class="skillsname">skills</span></h1>
-                </div>
-                   <p class="skillsPar">I'm currently diving deep into the world of Data Science, and I've been actively learning and using several essential tools and libraries. 
-    I work with <strong>Python</strong> as my main programming language, and I use <strong>Git</strong> to manage and track my code effectively. 
-    For data analysis, I rely heavily on <strong>Pandas</strong> to clean, manipulate, and explore datasets. 
-    When it comes to visualizing data and presenting insights, <strong>Matplotlib</strong> is my go-to library.
-    I'm constantly improving my skills through hands-on projects, and I'm passionate about mastering these tools to build real-world solutions.</p>
-                </div>
-         <ul>
-            <li>
-                <div class="skils-img">
-                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="40" alt="java logo" />
-
-                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="40" alt="python logo" />
-
-                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="40" alt="vscode logo" />
-                     
-                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg" height="40" alt="anaconda logo" />
-                     
-                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height="40" alt="github logo" />
-                     
-                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="40" alt="git logo"/>
-
-                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maya/maya-original.svg" height="40" alt="maya logo"/>
-
-                     <img src="https://raw.githubusercontent.com/valohai/ml-logos/master/pandas.svg" height="40" alt="pandas logo"/>
-
-                     <img src="https://raw.githubusercontent.com/valohai/ml-logos/master/matplotlib.svg" height="40" alt="matplotlib logo"/>
-
-                     <img src="svg/NumPy_idI8hEnkr2_1.svg" height="40" alt="numpy logo"/>
-
-
-
-                    </div>
-            </li>
-         </ul>
-
-        <!-- New Skills Organization -->
-        <div class="skillSetContainer">
-            <!-- Programming Languages -->
-            <div class="skillContainer">
-                <h3 class="skillTitle">Programming Languages</h3>
-                <div class="skils-img">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="50" alt="python logo"/>
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="50" alt="java logo"/>
-                </div>
-            </div>
-
-            <!-- Python & Data Science -->
-            <div class="skillContainer">
-                <h3 class="skillTitle">Python & Data Science</h3>
-                <div class="skils-img">
-                    <img src="https://raw.githubusercontent.com/valohai/ml-logos/master/pandas.svg" height="45" alt="pandas logo"/>
-                    <img src="svg/NumPy_idI8hEnkr2_1.svg" height="45" alt="numpy logo"/>
-                    <img src="https://raw.githubusercontent.com/valohai/ml-logos/master/matplotlib.svg" height="45" alt="matplotlib logo"/>
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" height="45" alt="jupyter logo"/>
-                </div>
-            </div>
-
-            <!-- Tools & Technologies -->
-            <div class="skillContainer">
-                <h3 class="skillTitle">Tools & Technologies</h3>
-                <div class="skils-img">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" height="45" alt="vscode logo" />
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg" height="45" alt="anaconda logo" />
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height="45" alt="github logo" />
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="45" alt="git logo"/>
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maya/maya-original.svg" height="45" alt="maya logo"/>
-                </div>
-            </div>
-        </div>  
-        <section class="works" id="MyWorks">
-            <div class="worksContainer">
-                <div class="projectTitle">
-                    <h1 class="ProjectName">My Recent</h1>
-                    <h1 class="aboutTitle">works</h1>
-                </div>
-                <p class="works-description">
-                    Explore my latest data science and development projects, featuring machine learning, 
-                    data analysis, and system development solutions.
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content" data-aos="fade-up">
+            <div class="hero-text">
+                <p class="greeting">Hello, I'm</p>
+                <h1 class="hero-name">Turki Al-Mutairi</h1>
+                <h2 class="hero-title">I am a <span class="typewriter"></span></h2>
+                <p class="hero-description">
+                    Transforming raw data into actionable insights. Passionate about Machine Learning, AI, and building intelligent solutions.
                 </p>
-                
-                <div class="projects-grid" id="projects-grid">
-                    <!-- Featured Projects using projects.html design -->
-                    <div class="project-card" data-category="data-analysis">
-                        <img src="imgs/Google Stock Prices.png" alt="Google Stock Analysis" class="project-image">
-                        <div class="project-info">
-                            <h3 class="project-title">Google Stock Analysis</h3>
-                            <p class="project-description">Comprehensive analysis of Google stock price trends using advanced data visualization and statistical modeling techniques to identify market patterns and investment insights.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Python</span>
-                                <span class="project-tag">Pandas</span>
-                                <span class="project-tag">Matplotlib</span>
-                                <span class="project-tag">Data Analysis</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/turki013/Google-stock-by-year" target="_blank" class="project-link github-link">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                        <path d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"/>
-                                    </svg>
-                                    GitHub
-                                </a>
-                                <a href="https://github.com/turki013/Google-stock-by-year" target="_blank" class="project-link demo-link">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
-                                    </svg>
-                                    Live Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-category="data-analysis">
-                        <img src="imgs/Electric Vehicle Sales & Stock Visualizer.png" alt="Electric Vehicle Analysis" class="project-image">
-                        <div class="project-info">
-                            <h3 class="project-title">Electric Vehicle Market Analysis</h3>
-                            <p class="project-description">Advanced data analysis of electric vehicle market trends with interactive dashboards and advanced visualization techniques for market insights and sales forecasting.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Python</span>
-                                <span class="project-tag">Pandas</span>
-                                <span class="project-tag">Visualization</span>
-                                <span class="project-tag">Forecasting</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/turki013/Electric-car-sales" target="_blank" class="project-link github-link">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                        <path d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"/>
-                                    </svg>
-                                    GitHub
-                                </a>
-                                <a href="https://github.com/turki013/Electric-car-sales" target="_blank" class="project-link demo-link">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
-                                    </svg>
-                                    Live Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-category="data-analysis">
-                        <img src="imgs/Dashboard.png" alt="Saudi Schools Dashboard" class="project-image">
-                        <div class="project-info">
-                            <h3 class="project-title">Saudi Schools Data Analysis</h3>
-                            <p class="project-description">Interactive data visualization dashboard analyzing Saudi Arabian educational statistics with comprehensive insights into school performance and demographic trends.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Python</span>
-                                <span class="project-tag">Dashboard</span>
-                                <span class="project-tag">Education</span>
-                                <span class="project-tag">Visualization</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/turki013/Saudi-Schools-DataAnalysis-2025" target="_blank" class="project-link github-link">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                        <path d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z"/>
-                                    </svg>
-                                    GitHub
-                                </a>
-                                <a href="https://github.com/turki013/Saudi-Schools-DataAnalysis-2025" target="_blank" class="project-link demo-link">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
-                                    </svg>
-                                    Live Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-primary">Hire Me</a>
+                    <a href="Turki_Nasser_Almutairi_cv.pdf" class="btn btn-outline" download>Download CV <i class="fas fa-download"></i></a>
                 </div>
-
-                <div class="projects-action">
-                    <div class="projects-stats">
-                        <div class="stat-item">
-                            <span class="stat-number" id="projects-count">7</span>
-                            <span class="stat-label">Projects</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">56+</span>
-                            <span class="stat-label">Stars</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">3+</span>
-                            <span class="stat-label">Languages</span>
-                        </div>
-                    </div>
-                    <a href="projects.html" class="view-all-btn">
-                        <span>View All Projects</span>
-                        <svg class="arrow-icon" viewBox="0 0 24 24" width="20" height="20">
-                            <path fill="currentColor" d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z"/>
-                        </svg>
-                    </a>
+                <div class="social-links">
+                    <a href="https://github.com/turki013" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/turki-al-mutairi-1486b3244/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:trkee112299@gmail.com"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
-        </section>
-
-        <section class="contactContainer" id="contactMe">
-            <div class="contactTitle">
-                <h1 class="ProjectName">Contact</h1>
-                <h1 class="aboutTitle">Me</h1>
-            </div>
-            <div class="countact">
-                <div class="email">
-                  <img src="svg/Email.svg" alt="email logo"/>
-                  <a href="mailto :trkee112299@gmail.com"><h3>trkee112299@gmail.com</h3></a>
+            <div class="hero-image" data-aos="fade-left">
+                <div class="img-wrapper">
+                    <img src="svg/Hero.svg" alt="Turki Al-Mutairi">
                 </div>
+            </div>
+        </div>
+        <a href="#about" class="scroll-down">
+            <div class="mouse">
+                <span></span>
+            </div>
+        </a>
+    </section>
 
-                <div class="socialMedia">
-                    <!-- LinkedIn Interactive Button -->
-                    <div class="tooltip-container">
-                        <div class="tooltip">
-                            <div class="profile">
-                                <div class="user">
-                                    <div class="img">TA</div>
-                                    <div class="details">
-                                        <div class="name">Turki Al-Mutairi</div>
-                                        <div class="username">@turki-al-mutairi</div>
-                                    </div>
-                                </div>
-                                <div class="about">Data Scientist</div>
-                            </div>
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">About <span class="highlight">Me</span></h2>
+            <div class="about-content">
+                <div class="about-img" data-aos="fade-right">
+                    <img src="svg/AboutMe.svg" alt="About Me">
+                </div>
+                <div class="about-text" data-aos="fade-left">
+                    <h3>Data Science & AI Specialist</h3>
+                    <p>
+                        I'm a passionate Data Science student at SEU, dedicated to exploring the frontiers of Artificial Intelligence and Machine Learning. My journey is driven by a curiosity to understand patterns in data and a desire to build predictive models that solve real-world problems.
+                    </p>
+                    <p>
+                        Beyond coding, I run the "Data Science Student" Telegram channel, where I share resources and insights with the community. I thrive on challenges, hackathons, and continuous learning.
+                    </p>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <h3>7+</h3>
+                            <p>Projects</p>
                         </div>
-                        <div class="text">
-                            <a class="icon" href="https://www.linkedin.com/in/turki-al-mutairi-1486b3244/" target="_blank">
-                                <div class="layer">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span class="fab fa-linkedin">
-                                        <svg viewBox="0 0 448 512" height="1em">
-                                            <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div class="text">LinkedIn</div>
-                            </a>
+                        <div class="stat-box">
+                            <h3>56+</h3>
+                            <p>GitHub Stars</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>3+</h3>
+                            <p>Years Coding</p>
                         </div>
                     </div>
-                    
-                    <a href="https://github.com/turki013" target="_blank">       
-                    <img src="svg/github.svg"  alt="GitHub logo"/>
-                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <hr/>
-        <footer>
-            <p>© 2025 Turki-al-mutairi. All rights reserved.</p>
-        </footer>
-
-        <script>
-            // Hamburger Menu Toggle
-            const hamburgerMenu = document.getElementById('hamburgerMenu');
-            const navigation = document.getElementById('navigation');
-
-            hamburgerMenu.addEventListener('click', function() {
-                hamburgerMenu.classList.toggle('active');
-                navigation.classList.toggle('active');
-            });
-
-            // Close menu when clicking on a link
-            const navLinks = document.querySelectorAll('.navigation a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburgerMenu.classList.remove('active');
-                    navigation.classList.remove('active');
-                });
-            });
-
-            // Close menu when clicking outside
-            document.addEventListener('click', function(event) {
-                const isClickInsideNav = navigation.contains(event.target);
-                const isClickOnHamburger = hamburgerMenu.contains(event.target);
+    <!-- Skills Section -->
+    <section id="skills" class="section skills-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">My <span class="highlight">Skills</span></h2>
+            <div class="skills-container">
                 
-                if (!isClickInsideNav && !isClickOnHamburger) {
-                    hamburgerMenu.classList.remove('active');
-                    navigation.classList.remove('active');
-                }
-            });
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
+                    <h3><i class="fas fa-code"></i> Languages</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                            <span>Java</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
 
-            // Dynamic project counter
-            document.addEventListener('DOMContentLoaded', function() {
-                // Count project cards in main page
-                const projectCards = document.querySelectorAll('.project-card');
-                const projectCounter = document.getElementById('projects-count');
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+                    <h3><i class="fas fa-brain"></i> Data Science</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item">
+                            <img src="https://raw.githubusercontent.com/valohai/ml-logos/master/pandas.svg" alt="Pandas">
+                            <span>Pandas</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="svg/NumPy_idI8hEnkr2_1.svg" alt="NumPy">
+                            <span>NumPy</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://raw.githubusercontent.com/valohai/ml-logos/master/matplotlib.svg" alt="Matplotlib">
+                            <span>Matplotlib</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" alt="Jupyter">
+                            <span>Jupyter</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
+                    <h3><i class="fas fa-tools"></i> Tools</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+                            <span>GitHub</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code">
+                            <span>VS Code</span>
+                        </div>
+                        <div class="skill-item">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg" alt="Anaconda">
+                            <span>Anaconda</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Featured <span class="highlight">Projects</span></h2>
+            <div class="projects-grid">
                 
-                if (projectCounter) {
-                    projectCounter.textContent = projectCards.length;
-                }
-            });
-        </script>
+                <!-- Project 1 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="project-img">
+                        <img src="imgs/Google Stock Prices.png" alt="Google Stock Analysis">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/turki013/Google-stock-by-year" target="_blank"><i class="fab fa-github"></i></a>
+                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Google Stock Analysis</h3>
+                        <p>Comprehensive analysis of Google stock price trends using advanced data visualization and statistical modeling.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>Pandas</span>
+                            <span>Matplotlib</span>
+                        </div>
+                    </div>
+                </div>
 
-        </body>
-        </html>
+                <!-- Project 2 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="project-img">
+                        <img src="imgs/Electric Vehicle Sales & Stock Visualizer.png" alt="EV Market Analysis">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/turki013/Electric-car-sales" target="_blank"><i class="fab fa-github"></i></a>
+                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>EV Market Analysis</h3>
+                        <p>Advanced data analysis of electric vehicle market trends with interactive dashboards and sales forecasting.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>Visualization</span>
+                            <span>Forecasting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="project-img">
+                        <img src="imgs/Dashboard.png" alt="Saudi Schools Dashboard">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="https://github.com/turki013/Saudi-Schools-DataAnalysis-2025" target="_blank"><i class="fab fa-github"></i></a>
+                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Saudi Schools Analysis</h3>
+                        <p>Interactive data visualization dashboard analyzing Saudi Arabian educational statistics and trends.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>Dashboard</span>
+                            <span>Education</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="view-more-container">
+                <a href="projects.html" class="btn btn-outline">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Get In <span class="highlight">Touch</span></h2>
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-item">
+                        <div class="icon-box">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>Email</h3>
+                            <p>trkee112299@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon-box">
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>LinkedIn</h3>
+                            <p>Turki Al-Mutairi</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon-box">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>GitHub</h3>
+                            <p>@turki013</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm" data-aos="fade-left">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>About Me</h3>
+                    <p>
+                        Passionate Data Scientist and AI enthusiast dedicated to transforming complex data into actionable insights. Let's build the future together.
+                    </p>
+                    <div class="footer-socials" style="justify-content: flex-start; margin-top: 0;">
+                        <a href="https://github.com/turki013" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/turki-al-mutairi-1486b3244/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://t.me/DataScienceStudent" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="#projects"><i class="fas fa-chevron-right"></i> Projects</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:trkee112299@gmail.com"><i class="fas fa-envelope"></i> trkee112299@gmail.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Riyadh, Saudi Arabia</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Turki Al-Mutairi. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    
+    <!-- Firebase Integration -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBXdwMw9m8S0AGUsYY5wxcyT2lVF-udPMI",
+        authDomain: "portfolio-2aca4.firebaseapp.com",
+        projectId: "portfolio-2aca4",
+        storageBucket: "portfolio-2aca4.firebasestorage.app",
+        messagingSenderId: "257395634614",
+        appId: "1:257395634614:web:2b27332e2527d5e5ced117",
+        measurementId: "G-0XJ5SD044W"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const db = getFirestore(app);
+
+      // Toast Notification Function
+      function showToast(message, type = 'success') {
+          const container = document.getElementById('toastContainer');
+          const toast = document.createElement('div');
+          toast.className = `toast ${type}`;
+          
+          const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+          
+          toast.innerHTML = `
+              <i class="fas ${icon}"></i>
+              <span>${message}</span>
+          `;
+          
+          container.appendChild(toast);
+          
+          // Trigger animation
+          setTimeout(() => toast.classList.add('show'), 10);
+          
+          // Remove after 3 seconds
+          setTimeout(() => {
+              toast.classList.remove('show');
+              setTimeout(() => toast.remove(), 300);
+          }, 3000);
+      }
+
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+          contactForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              
+              const name = document.getElementById('name').value;
+              const email = document.getElementById('email').value;
+              const message = document.getElementById('message').value;
+              const submitBtn = contactForm.querySelector('button[type="submit"]');
+              const originalBtnText = submitBtn.innerText;
+
+              try {
+                  submitBtn.innerText = 'Sending...';
+                  submitBtn.disabled = true;
+
+                  await addDoc(collection(db, "messages"), {
+                      name: name,
+                      email: email,
+                      message: message,
+                      timestamp: new Date()
+                  });
+
+                  showToast('Message sent successfully!', 'success');
+                  contactForm.reset();
+              } catch (error) {
+                  console.error("Error adding document: ", error);
+                  showToast('Error sending message. Please try again.', 'error');
+              } finally {
+                  submitBtn.innerText = originalBtnText;
+                  submitBtn.disabled = false;
+              }
+          });
+      }
+    </script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Typing Effect
+        var typed = new Typed('.typewriter', {
+            strings: ['Data Scientist', 'Machine Learning Engineer', 'Python Developer'],
+            typeSpeed: 100,
+            backSpeed: 60,
+            loop: true
+        });
+
+        // Theme Switcher Logic
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.body.classList.add(currentTheme);
+
+            if (currentTheme === 'light-mode') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light-mode');
+            } else {
+                document.body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            }
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme);
+
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
