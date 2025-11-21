@@ -1,159 +1,279 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تركي المطيري | Turki Almutairi</title>
     
-    <!-- Primary Meta Tags -->
-    <title>Turki Nasser Al-Mutairi DS | Data Science Portfolio</title>
-    <meta name="title" content="Turki Nasser Al-Mutairi DS | Data Science Portfolio">
-    <meta name="description" content="Portfolio of Turki Nasser Al-Mutairi (DS), a Data Scientist specializing in Machine Learning, AI, and Data Analysis. Explore projects and insights. | ملف تركي ناصر عايد المطيري (DS) في علم البيانات">
-    <meta name="keywords" content="Turki Nasser Al-Mutairi, DS, Data Science, Portfolio, Machine Learning, AI, Python, Saudi Arabia, Riyadh, Data Scientist, تركي ناصر عايد المطيري, علم البيانات, ذكاء اصطناعي, تعلم الآلة">
-    <meta name="author" content="Turki Nasser Al-Mutairi">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://data-student.software/">
-    <meta property="og:title" content="Turki Nasser Al-Mutairi DS | Data Science Portfolio">
-    <meta property="og:description" content="Portfolio of Turki Nasser Al-Mutairi (DS), a Data Scientist specializing in Machine Learning, AI, and Data Analysis.">
-    <meta property="og:image" content="https://data-student.software/imgs/Dashboard.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://data-student.software/">
-    <meta property="twitter:title" content="Turki Nasser Al-Mutairi DS | Data Science Portfolio">
-    <meta property="twitter:description" content="Portfolio of Turki Nasser Al-Mutairi (DS), a Data Scientist specializing in Machine Learning, AI, and Data Analysis.">
-    <meta property="twitter:image" content="https://data-student.software/imgs/Dashboard.png">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://data-student.software/">
-
-    <link rel="stylesheet" href="styles.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Tajawal) -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Turki Nasser Al-Mutairi",
-      "url": "https://data-student.software/",
-      "image": "https://data-student.software/svg/Hero.svg",
-      "sameAs": [
-        "https://github.com/turki013",
-        "https://www.linkedin.com/in/turki-al-mutairi-1486b3244/",
-        "https://t.me/Data_science_Ai16"
-      ],
-      "jobTitle": "Data Scientist",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Freelance / Student"
-      },
-      "description": "Data Scientist specializing in Machine Learning, AI, and Data Analysis."
-    }
-    </script>
+    <!-- Required Libraries (Three.js Only - No GSAP/Animation Libs) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            overflow-x: hidden;
+            color: #fff;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 4px;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(30, 41, 59, 0.85); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-2px);
+            border-color: #38bdf8;
+            box-shadow: 0 4px 20px -5px rgba(56, 189, 248, 0.2);
+        }
+
+        /* 3D Canvas Container */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        /* Typography Gradient */
+        .text-gradient {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Typewriter Cursor */
+        .cursor {
+            display: inline-block;
+            width: 4px;
+            height: 1em;
+            background-color: #38bdf8;
+            margin-right: 5px;
+            vertical-align: text-bottom;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Scroll Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body>
-    <!-- Background Animation -->
-    <div class="bg-animation">
-        <div id="stars"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
-    </div>
+<body class="antialiased selection:bg-cyan-500 selection:text-white">
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <span class="logo-text">T</span>urki<span class="dot">.</span>
+    <!-- 3D Background -->
+    <div id="canvas-container"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass border-b border-white/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-code text-cyan-400"></i>
+                <div>Turki<span class="text-cyan-400">Almutairi</span></div>
             </a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div class="hidden md:flex space-x-8 space-x-reverse">
+                <a href="#home" class="hover:text-cyan-400 transition-colors">الرئيسية</a>
+                <a href="#about" class="hover:text-cyan-400 transition-colors">عني</a>
+                <a href="#skills" class="hover:text-cyan-400 transition-colors">المهارات</a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors">المشاريع</a>
+                <a href="#contact" class="bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-2 rounded-full transition-all shadow-lg shadow-cyan-500/30">تواصل معي</a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-                <li class="theme-switch-wrapper">
-                    <label class="theme-switch" for="checkbox">
-                        <input type="checkbox" id="checkbox" />
-                        <div class="slider round">
-                            <i class="fas fa-sun icon sun"></i>
-                            <i class="fas fa-moon icon moon"></i>
-                        </div>
-                    </label>
-                </li>
-            </ul>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none z-50 p-2">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-content" data-aos="fade-up">
-            <div class="hero-text">
-                <p class="greeting">Hello, I'm</p>
-                <h1 class="hero-name">Turki Al-Mutairi</h1>
-                <h2 class="hero-title">I am a <span class="typewriter"></span></h2>
-                <p class="hero-description">
-                    Transforming raw data into actionable insights. Passionate about Machine Learning, AI, and building intelligent solutions.
-                </p>
-                <div class="hero-btns">
-                    <a href="#contact" class="btn btn-primary">Hire Me</a>
-                    <a href="Turki_Nasser_Almutairi_cv.pdf" class="btn btn-outline" download>Download CV <i class="fas fa-download"></i></a>
+    <!-- Mobile Menu Backdrop -->
+    <div id="mobile-backdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[55] hidden transition-opacity duration-300 opacity-0"></div>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[280px] bg-[#0f172a] border-l border-white/10 z-[60] transform translate-x-full transition-transform duration-300 shadow-2xl">
+        <div class="p-6 flex flex-col h-full">
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+                    <span class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-code text-cyan-400"></i> القائمة
+                    </span>
+                    <button id="close-menu-btn" class="text-slate-400 hover:text-white transition-colors p-2">
+                        <i class="fa-solid fa-xmark text-2xl"></i>
+                    </button>
                 </div>
-                <div class="social-links">
-                    <a href="https://github.com/turki013" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/turki-al-mutairi-1486b3244/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:trkee112299@gmail.com"><i class="fas fa-envelope"></i></a>
+
+                <!-- Links -->
+                <div class="flex flex-col space-y-2 flex-1">
+                    <a href="#home" class="flex items-center gap-4 text-lg text-slate-300 hover:text-cyan-400 hover:bg-white/5 p-3 rounded-xl transition-all mobile-link group">
+                        <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                            <i class="fa-solid fa-house text-sm group-hover:text-cyan-400"></i>
+                        </div>
+                        الرئيسية
+                    </a>
+                    <a href="#about" class="flex items-center gap-4 text-lg text-slate-300 hover:text-cyan-400 hover:bg-white/5 p-3 rounded-xl transition-all mobile-link group">
+                        <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                            <i class="fa-solid fa-user text-sm group-hover:text-cyan-400"></i>
+                        </div>
+                        عني
+                    </a>
+                    <a href="#skills" class="flex items-center gap-4 text-lg text-slate-300 hover:text-cyan-400 hover:bg-white/5 p-3 rounded-xl transition-all mobile-link group">
+                        <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                            <i class="fa-solid fa-code text-sm group-hover:text-cyan-400"></i>
+                        </div>
+                        المهارات
+                    </a>
+                    <a href="#projects" class="flex items-center gap-4 text-lg text-slate-300 hover:text-cyan-400 hover:bg-white/5 p-3 rounded-xl transition-all mobile-link group">
+                        <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                            <i class="fa-solid fa-briefcase text-sm group-hover:text-cyan-400"></i>
+                        </div>
+                        المشاريع
+                    </a>
                 </div>
-            </div>
-            <div class="hero-image" data-aos="fade-left">
-                <div class="img-wrapper">
-                    <img src="svg/Hero.svg" alt="Turki Al-Mutairi">
+
+                <!-- Footer Action -->
+                <div class="mt-auto pt-6 border-t border-white/10">
+                    <a href="#contact" class="flex justify-center items-center gap-2 w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white py-3 rounded-xl font-bold shadow-lg shadow-cyan-500/20 transition-all mobile-link">
+                        <i class="fa-solid fa-envelope"></i> تواصل معي
+                    </a>
                 </div>
             </div>
         </div>
-        <a href="#about" class="scroll-down">
-            <div class="mouse">
-                <span></span>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20">
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="text-right z-10">
+                <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-cyan-400 uppercase bg-cyan-400/10 rounded-full border border-cyan-400/20">
+                    Data Science & AI Student
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight min-h-[160px] md:min-h-auto">
+                    أنا <span class="text-gradient">تركي المطيري</span><br>
+                    <span id="typewriter-text" class="text-slate-100"></span><span class="cursor"></span>
+                </h1>
+                <p class="text-slate-300 text-lg mb-8 leading-relaxed max-w-lg">
+                    طالب علم بيانات وذكاء اصطناعي في الجامعة السعودية الإلكترونية. أمتلك مهارات قوية في بناء الأنظمة الذكية واستخراج الرؤى من البيانات المعقدة.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#projects" class="group relative px-8 py-3 bg-cyan-500 rounded-full overflow-hidden shadow-lg shadow-cyan-500/30">
+                        <span class="relative text-white font-semibold">شاهد مشاريعي</span>
+                    </a>
+                    <a href="#contact" class="px-8 py-3 border border-white/20 rounded-full hover:bg-white/5 transition-all font-semibold">
+                        تواصل معي <i class="fa-solid fa-envelope mr-2"></i>
+                    </a>
+                </div>
             </div>
-        </a>
+            
+            <!-- Professional Abstract Logo Area -->
+             <div class="relative hidden md:flex justify-center items-center">
+                <div class="relative w-80 h-80 bg-slate-800/40 rounded-full flex items-center justify-center border border-cyan-500/10 shadow-[0_0_70px_rgba(56,189,248,0.1)] backdrop-blur-sm">
+                    <!-- SVG Tech Logo -->
+                    <svg width="180" height="180" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+                        <!-- Hexagon Frame -->
+                        <path d="M100 20L170 60V140L100 180L30 140V60L100 20Z" stroke="url(#logoGradient)" stroke-width="2" fill="rgba(15, 23, 42, 0.6)"/>
+                        
+                        <!-- Internal Network/Data Structure -->
+                        <path d="M100 60V100M100 100L135 120M100 100L65 120" stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="100" cy="100" r="8" fill="#22d3ee" />
+                        <circle cx="100" cy="60" r="5" fill="#818cf8" />
+                        <circle cx="135" cy="120" r="5" fill="#818cf8" />
+                        <circle cx="65" cy="120" r="5" fill="#818cf8" />
+                        
+                        <!-- Floating Nodes (Satellites) -->
+                        <circle cx="100" cy="20" r="4" fill="#22d3ee" opacity="0.8" />
+                        <circle cx="170" cy="60" r="4" fill="#22d3ee" opacity="0.6" />
+                        <circle cx="170" cy="140" r="4" fill="#818cf8" opacity="0.6" />
+                        <circle cx="100" cy="180" r="4" fill="#818cf8" opacity="0.8" />
+                        <circle cx="30" cy="140" r="4" fill="#818cf8" opacity="0.6" />
+                        <circle cx="30" cy="60" r="4" fill="#22d3ee" opacity="0.6" />
+
+                        <!-- Connecting Lines (Subtle) -->
+                        <path d="M100 20L100 60" stroke="#22d3ee" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="4 4"/>
+                        <path d="M30 60L65 120" stroke="#22d3ee" stroke-width="1" stroke-opacity="0.2"/>
+                        <path d="M170 60L135 120" stroke="#22d3ee" stroke-width="1" stroke-opacity="0.2"/>
+                        
+                        <defs>
+                            <linearGradient id="logoGradient" x1="30" y1="20" x2="170" y2="180" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#22d3ee" />
+                                <stop offset="100%" stop-color="#818cf8" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+             </div>
+        </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section about-section">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">About <span class="highlight">Me</span></h2>
-            <div class="about-content">
-                <div class="about-img" data-aos="fade-right">
-                    <img src="svg/AboutMe.svg" alt="About Me">
-                </div>
-                <div class="about-text" data-aos="fade-left">
-                    <h3>Data Science & AI Specialist</h3>
-                    <p>
-                        I'm a passionate Data Science student at SEU, dedicated to exploring the frontiers of Artificial Intelligence and Machine Learning. My journey is driven by a curiosity to understand patterns in data and a desire to build predictive models that solve real-world problems.
-                    </p>
-                    <p>
-                        Beyond coding, I run the "Data Science Student" Telegram channel, where I share resources and insights with the community. I thrive on challenges, hackathons, and continuous learning.
-                    </p>
-                    <div class="stats-grid">
-                        <div class="stat-box">
-                            <h3>7+</h3>
-                            <p>Projects</p>
-                        </div>
-                        <div class="stat-box">
-                            <h3>56+</h3>
-                            <p>GitHub Stars</p>
-                        </div>
-                        <div class="stat-box">
-                            <h3>3+</h3>
-                            <p>Years Coding</p>
-                        </div>
+    <section id="about" class="py-20 relative z-10 reveal">
+        <div class="container mx-auto px-6">
+            <div class="glass p-8 md:p-12 rounded-3xl max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="relative h-full flex flex-col justify-center">
+                         <div class="border-r-4 border-cyan-500 pr-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">التعليم</h3>
+                            <p class="text-slate-400">بكالوريوس علم بيانات وذكاء اصطناعي</p>
+                            <p class="text-cyan-400 text-sm">الجامعة السعودية الإلكترونية (2023 - 2027)</p>
+                         </div>
+                         <div class="border-r-4 border-purple-500 pr-6 mt-8">
+                            <h3 class="text-2xl font-bold text-white mb-2">العضويات</h3>
+                            <p class="text-slate-400">عضو في نادي الذكاء الاصطناعي (ALAI Club)</p>
+                            <p class="text-purple-400 text-sm">الرياض، المملكة العربية السعودية</p>
+                         </div>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6">نبذة عني</h2>
+                        <p class="text-slate-300 mb-4 leading-loose text-justify">
+                            طالب متخصص في علم البيانات والذكاء الاصطناعي، أمتلك خلفية قوية في لغات البرمجة مثل Python و Java. شغوف بالتعلم الآلي (Machine Learning) وتحليل البيانات، ولدي خبرة عملية في استخدام أدوات التصوير البياني مثل Power BI و Excel.
+                        </p>
+                        <p class="text-slate-300 mb-6 leading-loose text-justify">
+                            أسعى دائمًا لتطوير مهاراتي من خلال الهاكاثونات والمسابقات البرمجية، وأشارك المعرفة بنشاط عبر قنوات تعليمية متخصصة.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -161,397 +281,518 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section skills-section">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">My <span class="highlight">Skills</span></h2>
-            <div class="skills-container">
+    <section id="skills" class="py-20 relative z-10 reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">المهارات <span class="text-gradient">التقنية</span></h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Skill Cards -->
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <i class="fa-brands fa-python text-4xl text-yellow-400 mb-3"></i>
+                    <h3 class="text-lg font-bold">Python & Java</h3>
+                </div>
                 
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
-                    <h3><i class="fas fa-code"></i> Languages</h3>
-                    <div class="skill-grid">
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
-                            <span>Python</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
-                            <span>Java</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
-                            <span>JavaScript</span>
-                        </div>
-                    </div>
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <i class="fa-solid fa-brain text-4xl text-purple-400 mb-3"></i>
+                    <h3 class="text-lg font-bold">Machine Learning</h3>
+                    <p class="text-xs text-slate-400 mt-1">Deep Learning (DL)</p>
                 </div>
 
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
-                    <h3><i class="fas fa-brain"></i> Data Science</h3>
-                    <div class="skill-grid">
-                        <div class="skill-item">
-                            <img src="https://raw.githubusercontent.com/valohai/ml-logos/master/pandas.svg" alt="Pandas">
-                            <span>Pandas</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="svg/NumPy_idI8hEnkr2_1.svg" alt="NumPy">
-                            <span>NumPy</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://raw.githubusercontent.com/valohai/ml-logos/master/matplotlib.svg" alt="Matplotlib">
-                            <span>Matplotlib</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" alt="Jupyter">
-                            <span>Jupyter</span>
-                        </div>
-                    </div>
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <i class="fa-solid fa-chart-simple text-4xl text-cyan-400 mb-3"></i>
+                    <h3 class="text-lg font-bold">Data Visualization</h3>
+                    <p class="text-xs text-slate-400 mt-1">Matplotlib, Power BI</p>
                 </div>
 
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
-                    <h3><i class="fas fa-tools"></i> Tools</h3>
-                    <div class="skill-grid">
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
-                            <span>Git</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
-                            <span>GitHub</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code">
-                            <span>VS Code</span>
-                        </div>
-                        <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg" alt="Anaconda">
-                            <span>Anaconda</span>
-                        </div>
-                    </div>
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <i class="fa-brands fa-git-alt text-4xl text-red-400 mb-3"></i>
+                    <h3 class="text-lg font-bold">Tools</h3>
+                    <p class="text-xs text-slate-400 mt-1">Git, GitHub, SQL</p>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="section projects-section">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Featured <span class="highlight">Projects</span></h2>
-            <div class="projects-grid">
+    <section id="projects" class="py-20 relative z-10 reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">أبرز <span class="text-gradient">المشاريع</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
                 
                 <!-- Project 1 -->
-                <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="project-img">
-                        <img src="imgs/Google Stock Prices.png" alt="Google Stock Analysis">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://github.com/turki013/Google-stock-by-year" target="_blank"><i class="fab fa-github"></i></a>
-                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                            </div>
+                <a href="https://github.com/turki013/Real-vs-AI-Generated" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-cyan-500/10 rounded-lg">
+                            <i class="fa-solid fa-check-double text-2xl text-cyan-400"></i>
                         </div>
+                        <span class="text-xs font-mono text-slate-400">05/2025</span>
                     </div>
-                    <div class="project-content">
-                        <h3>Google Stock Analysis</h3>
-                        <p>Comprehensive analysis of Google stock price trends using advanced data visualization and statistical modeling.</p>
-                        <div class="project-tags">
-                            <span>Python</span>
-                            <span>Pandas</span>
-                            <span>Matplotlib</span>
-                        </div>
+                    <h3 class="text-xl font-bold mb-2">Real vs AI Generated</h3>
+                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                        تطبيق بايثون يقوم بتصور بيانات تغريدات المشاهير ومقارنتها بالتغريدات المولدة بواسطة الذكاء الاصطناعي باستخدام المخططات البيانية.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Python</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Pandas</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Matplotlib</span>
                     </div>
-                </div>
+                </a>
 
                 <!-- Project 2 -->
-                <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="project-img">
-                        <img src="imgs/Electric Vehicle Sales & Stock Visualizer.png" alt="EV Market Analysis">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://github.com/turki013/Electric-car-sales" target="_blank"><i class="fab fa-github"></i></a>
-                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                            </div>
+                <a href="https://github.com/turki013/Electric-car-sales" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-green-500/10 rounded-lg">
+                            <i class="fa-solid fa-charging-station text-2xl text-green-400"></i>
                         </div>
+                        <span class="text-xs font-mono text-slate-400">CLI App</span>
                     </div>
-                    <div class="project-content">
-                        <h3>EV Market Analysis</h3>
-                        <p>Advanced data analysis of electric vehicle market trends with interactive dashboards and sales forecasting.</p>
-                        <div class="project-tags">
-                            <span>Python</span>
-                            <span>Visualization</span>
-                            <span>Forecasting</span>
-                        </div>
+                    <h3 class="text-xl font-bold mb-2">Electric Car Sales</h3>
+                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                        تطبيق سطر أوامر (Command-line) لتصور بيانات المركبات الكهربائية بطرق مختلفة (Bar charts, Scatter plots).
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Data Analysis</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Visualization</span>
                     </div>
-                </div>
+                </a>
 
                 <!-- Project 3 -->
-                <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="project-img">
-                        <img src="imgs/Dashboard.png" alt="Saudi Schools Dashboard">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="https://github.com/turki013/Saudi-Schools-DataAnalysis-2025" target="_blank"><i class="fab fa-github"></i></a>
-                                <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                            </div>
+                <a href="https://github.com/turki013/Google-stock-by-year" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-yellow-500/10 rounded-lg">
+                            <i class="fa-solid fa-arrow-trend-up text-2xl text-yellow-400"></i>
                         </div>
+                        <span class="text-xs font-mono text-slate-400">Finance</span>
                     </div>
-                    <div class="project-content">
-                        <h3>Saudi Schools Analysis</h3>
-                        <p>Interactive data visualization dashboard analyzing Saudi Arabian educational statistics and trends.</p>
-                        <div class="project-tags">
-                            <span>Python</span>
-                            <span>Dashboard</span>
-                            <span>Education</span>
-                        </div>
+                    <h3 class="text-xl font-bold mb-2">Google Stock Analysis</h3>
+                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                        مشروع لاستكشاف أسعار أسهم جوجل التاريخية منذ 2004، وتصور تطور حجم التداول سنة بعد سنة.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Pandas</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Matplotlib</span>
                     </div>
-                </div>
+                </a>
 
             </div>
-            <div class="view-more-container">
-                <a href="projects.html" class="btn btn-outline">View All Projects</a>
+
+            <!-- Show More Button -->
+            <div class="text-center mt-12">
+                <a href="projects.html" class="inline-flex items-center gap-2 px-8 py-3 bg-slate-800 hover:bg-slate-700 border border-cyan-500/30 rounded-full transition-all group">
+                    <span class="text-cyan-400 font-semibold group-hover:text-white transition-colors">عرض المزيد من المشاريع</span>
+                    <i class="fa-solid fa-arrow-left text-cyan-400 group-hover:-translate-x-1 transition-transform"></i>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section contact-section">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Get In <span class="highlight">Touch</span></h2>
-            <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right">
-                    <div class="contact-item">
-                        <div class="icon-box">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="info-text">
-                            <h3>Email</h3>
-                            <p>trkee112299@gmail.com</p>
+    <section id="contact" class="py-20 relative z-10 reveal">
+        <div class="container mx-auto px-6">
+            <div class="glass p-10 rounded-3xl border border-cyan-500/30">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Contact Info -->
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6">تواصل معي</h2>
+                        <p class="text-slate-300 mb-8 leading-relaxed">
+                            أنا متاح دائماً لمناقشة مشاريع جديدة، أفكار إبداعية، أو فرص للتعاون. لا تتردد في التواصل معي.
+                        </p>
+                        <div class="space-y-6">
+                            <a href="mailto:trkee112299@gmail.com" class="flex items-center gap-4 text-slate-300 hover:text-white transition-colors group">
+                                <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                                    <i class="fa-solid fa-envelope text-cyan-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-400">البريد الإلكتروني</p>
+                                    <p class="font-semibold">trkee112299@gmail.com</p>
+                                </div>
+                            </a>
+                            <div class="flex items-center gap-4 text-slate-300 group">
+                                <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-green-500/20 transition-colors">
+                                    <i class="fa-solid fa-phone text-green-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-400">رقم الهاتف</p>
+                                    <p class="font-semibold">0550494319</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-slate-300 group">
+                                <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-red-500/20 transition-colors">
+                                    <i class="fa-solid fa-location-dot text-red-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-400">الموقع</p>
+                                    <p class="font-semibold">الرياض، المملكة العربية السعودية</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <div class="icon-box">
-                            <i class="fab fa-linkedin-in"></i>
+
+                    <!-- Contact Form -->
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">الاسم</label>
+                            <input type="text" id="name" required class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors" placeholder="اسمك الكريم">
                         </div>
-                        <div class="info-text">
-                            <h3>LinkedIn</h3>
-                            <p>Turki Al-Mutairi</p>
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">البريد الإلكتروني</label>
+                            <input type="email" id="email" required class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors" placeholder="example@email.com">
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="icon-box">
-                            <i class="fab fa-github"></i>
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">الرسالة</label>
+                            <textarea id="message" required rows="4" class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors" placeholder="اكتب رسالتك هنا..."></textarea>
                         </div>
-                        <div class="info-text">
-                            <h3>GitHub</h3>
-                            <p>@turki013</p>
-                        </div>
-                    </div>
+                        <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-cyan-500/20 transition-all transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                            <span id="btn-text">إرسال الرسالة</span>
+                            <i id="btn-icon" class="fa-solid fa-paper-plane"></i>
+                            <i id="btn-loader" class="fa-solid fa-circle-notch fa-spin hidden"></i>
+                        </button>
+                    </form>
                 </div>
-                
-                <form class="contact-form" id="contactForm" data-aos="fade-left">
-                    <div class="form-group">
-                        <input type="text" id="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-col">
-                    <h3>About Me</h3>
-                    <p>
-                        Passionate Data Scientist and AI enthusiast dedicated to transforming complex data into actionable insights. Let's build the future together.
-                    </p>
-                    <div class="footer-socials" style="justify-content: flex-start; margin-top: 0;">
-                        <a href="https://github.com/turki013" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/turki-al-mutairi-1486b3244/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://t.me/Data_science_Ai16" target="_blank"><i class="fab fa-telegram"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
-                        <li><a href="#projects"><i class="fas fa-chevron-right"></i> Projects</a></li>
-                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:trkee112299@gmail.com"><i class="fas fa-envelope"></i> trkee112299@gmail.com</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Riyadh, Saudi Arabia</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Turki Al-Mutairi. All Rights Reserved.</p>
-            </div>
+    <footer class="py-6 border-t border-white/10 relative z-10 bg-slate-900/90">
+        <div class="container mx-auto px-6 text-center text-slate-500 text-sm">
+            <p>© 2025 تركي ناصر المطيري. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
 
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
+    <!-- Notification Toast -->
+    <div id="notification-toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4 px-6 py-4 bg-slate-800/90 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl translate-y-32 opacity-0 transition-all duration-500 z-[100] min-w-[320px]">
+        <div id="toast-icon-container" class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+            <i id="toast-icon" class="fa-solid fa-check text-green-400 text-xl"></i>
+        </div>
+        <div>
+            <h4 id="toast-title" class="font-bold text-white text-lg">تم الإرسال!</h4>
+            <p id="toast-message" class="text-sm text-slate-300">شكراً لتواصلك، سيتم الرد عليك قريباً.</p>
+        </div>
+    </div>
 
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    
-    <!-- Firebase Integration -->
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
-      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+        // ------------------------------------------------
+        // Firebase Configuration & Logic
+        // ------------------------------------------------
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyBXdwMw9m8S0AGUsYY5wxcyT2lVF-udPMI",
-        authDomain: "portfolio-2aca4.firebaseapp.com",
-        projectId: "portfolio-2aca4",
-        storageBucket: "portfolio-2aca4.firebasestorage.app",
-        messagingSenderId: "257395634614",
-        appId: "1:257395634614:web:2b27332e2527d5e5ced117",
-        measurementId: "G-0XJ5SD044W"
-      };
+        // ⚠️ استبدل البيانات التالية ببيانات مشروعك من Firebase Console
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXdwMw9m8S0AGUsYY5wxcyT2lVF-udPMI",
+            authDomain: "portfolio-2aca4.firebaseapp.com",
+            databaseURL: "https://portfolio-2aca4-default-rtdb.firebaseio.com",
+            projectId: "portfolio-2aca4",
+            storageBucket: "portfolio-2aca4.firebasestorage.app",
+            messagingSenderId: "257395634614",
+            appId: "1:257395634614:web:2b27332e2527d5e5ced117",
+            measurementId: "G-0XJ5SD044W"
+        };
 
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
-      const db = getFirestore(app);
+        // Initialize Firebase
+        let app, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getDatabase(app);
+        } catch (error) {
+            console.log("Firebase Config Placeholder - Please update with real keys");
+        }
 
-      // Toast Notification Function
-      function showToast(message, type = 'success') {
-          const container = document.getElementById('toastContainer');
-          const toast = document.createElement('div');
-          toast.className = `toast ${type}`;
-          
-          const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
-          
-          toast.innerHTML = `
-              <i class="fas ${icon}"></i>
-              <span>${message}</span>
-          `;
-          
-          container.appendChild(toast);
-          
-          // Trigger animation
-          setTimeout(() => toast.classList.add('show'), 10);
-          
-          // Remove after 3 seconds
-          setTimeout(() => {
-              toast.classList.remove('show');
-              setTimeout(() => toast.remove(), 300);
-          }, 3000);
-      }
+        // ------------------------------------------------
+        // Notification System
+        // ------------------------------------------------
+        const toast = document.getElementById('notification-toast');
+        const toastTitle = document.getElementById('toast-title');
+        const toastMessage = document.getElementById('toast-message');
+        const toastIcon = document.getElementById('toast-icon');
+        const toastIconContainer = document.getElementById('toast-icon-container');
 
-      const contactForm = document.getElementById('contactForm');
-      if (contactForm) {
-          contactForm.addEventListener('submit', async (e) => {
-              e.preventDefault();
-              
-              const name = document.getElementById('name').value;
-              const email = document.getElementById('email').value;
-              const message = document.getElementById('message').value;
-              const submitBtn = contactForm.querySelector('button[type="submit"]');
-              const originalBtnText = submitBtn.innerText;
+        window.showNotification = function(type, title, message) {
+            // Configure styles based on type
+            if (type === 'success') {
+                toastIconContainer.className = 'w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center shrink-0';
+                toastIcon.className = 'fa-solid fa-check text-green-400 text-xl';
+            } else if (type === 'error') {
+                toastIconContainer.className = 'w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center shrink-0';
+                toastIcon.className = 'fa-solid fa-xmark text-red-400 text-xl';
+            }
 
-              try {
-                  submitBtn.innerText = 'Sending...';
-                  submitBtn.disabled = true;
+            // Set Content
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
 
-                  await addDoc(collection(db, "messages"), {
-                      name: name,
-                      email: email,
-                      message: message,
-                      timestamp: new Date()
-                  });
+            // Show Toast
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            
+            // Hide after 4 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 4000);
+        }
 
-                  showToast('Message sent successfully!', 'success');
-                  contactForm.reset();
-              } catch (error) {
-                  console.error("Error adding document: ", error);
-                  showToast('Error sending message. Please try again.', 'error');
-              } finally {
-                  submitBtn.innerText = originalBtnText;
-                  submitBtn.disabled = false;
-              }
-          });
-      }
+        // ------------------------------------------------
+        // Form Handling
+        // ------------------------------------------------
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnIcon = document.getElementById('btn-icon');
+        const btnLoader = document.getElementById('btn-loader');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // UI Loading State
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                btnText.textContent = 'جاري الإرسال...';
+                btnIcon.classList.add('hidden');
+                btnLoader.classList.remove('hidden');
+
+                // Get Values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                try {
+                    // Check if Firebase is configured (Simple check)
+                    if (firebaseConfig.apiKey.includes("YOUR_API_KEY")) {
+                        throw new Error("يرجى إعداد Firebase أولاً في الكود");
+                    }
+
+                    // Timeout Promise to prevent hanging
+                    const timeout = new Promise((_, reject) => {
+                        setTimeout(() => reject(new Error("NetworkTimeout")), 5000);
+                    });
+
+                    // Push to Firebase with Timeout
+                    const messagesRef = ref(db, 'messages');
+                    await Promise.race([
+                        push(messagesRef, {
+                            name: name,
+                            email: email,
+                            message: message,
+                            timestamp: serverTimestamp()
+                        }),
+                        timeout
+                    ]);
+
+                    // Success
+                    showNotification('success', 'تم الإرسال بنجاح!', 'شكراً لتواصلك، سيتم الرد عليك قريباً.');
+                    contactForm.reset();
+
+                } catch (error) {
+                    console.error("Error:", error);
+                    
+                    if (error.message === "NetworkTimeout") {
+                        showNotification('error', 'خطأ في الاتصال', 'يرجى التأكد من إنشاء "Realtime Database" في Firebase Console.');
+                    } else if (error.message.includes("Firebase")) {
+                        showNotification('error', 'تنبيه المطور', 'يجب ربط Firebase في الكود ليعمل النموذج فعلياً.');
+                    } else {
+                        showNotification('error', 'حدث خطأ!', 'لم نتمكن من إرسال الرسالة، حاول مرة أخرى.');
+                    }
+                } finally {
+                    // Reset UI
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                    btnText.textContent = 'إرسال الرسالة';
+                    btnIcon.classList.remove('hidden');
+                    btnLoader.classList.add('hidden');
+                }
+            });
+        }
     </script>
 
+    <!-- Scripts -->
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
+        // ------------------------------------------------
+        // Typewriter Effect Logic (Vanilla JS)
+        // ------------------------------------------------
+        const typewriterElement = document.getElementById('typewriter-text');
+        const texts = ["شغوف بالبيانات", "طالب ذكاء اصطناعي", "مطور تعلم آلة"];
+        
+        let count = 0; // Loop through texts array
+        let index = 0; // Loop through characters of current text
+        let currentText = "";
+        let letter = "";
+        let isDeleting = false;
+        
+        // Speeds (in ms)
+        let typeSpeed = 100; 
+        const waitBeforeDelete = 2000; // Pause after finishing a sentence
+        const deleteSpeed = 50;
+        const pauseBeforeType = 500;
 
-        // Typing Effect
-        var typed = new Typed('.typewriter', {
-            strings: ['Data Scientist', 'Machine Learning Engineer', 'Python Developer'],
-            typeSpeed: 100,
-            backSpeed: 60,
-            loop: true
-        });
-
-        // Theme Switcher Logic
-        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-        const currentTheme = localStorage.getItem('theme');
-
-        if (currentTheme) {
-            document.body.classList.add(currentTheme);
-
-            if (currentTheme === 'light-mode') {
-                toggleSwitch.checked = true;
+        function type() {
+            if (count === texts.length) {
+                count = 0; // Loop back to start
             }
+            currentText = texts[count];
+
+            if (isDeleting) {
+                // Remove char
+                letter = currentText.slice(0, --index);
+                typeSpeed = deleteSpeed;
+            } else {
+                // Add char
+                letter = currentText.slice(0, ++index);
+                typeSpeed = 100;
+            }
+
+            typewriterElement.textContent = letter;
+
+            // Logic to switch state
+            if (!isDeleting && letter.length === currentText.length) {
+                // Finished typing -> Wait then delete
+                isDeleting = true;
+                typeSpeed = waitBeforeDelete;
+            } else if (isDeleting && letter.length === 0) {
+                // Finished deleting -> Next sentence
+                isDeleting = false;
+                count++;
+                typeSpeed = pauseBeforeType;
+            }
+
+            setTimeout(type, typeSpeed);
         }
 
-        function switchTheme(e) {
-            if (e.target.checked) {
-                document.body.classList.add('light-mode');
-                localStorage.setItem('theme', 'light-mode');
-            } else {
-                document.body.classList.remove('light-mode');
-                localStorage.setItem('theme', 'dark-mode');
-            }
+        // Start Typewriter on Load
+        document.addEventListener('DOMContentLoaded', type);
+
+        // ------------------------------------------------
+        // Scroll Animation Observer
+        // ------------------------------------------------
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ------------------------------------------------
+        // Mobile Menu Logic
+        // ------------------------------------------------
+        const btn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const backdrop = document.getElementById('mobile-backdrop');
+        const links = document.querySelectorAll('.mobile-link');
+
+        function openMenu() {
+            menu.classList.remove('translate-x-full');
+            backdrop.classList.remove('hidden');
+            // Small delay to allow display:block to apply before opacity transition
+            setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
         }
 
-        toggleSwitch.addEventListener('change', switchTheme);
+        function closeMenu() {
+            menu.classList.add('translate-x-full');
+            backdrop.classList.add('opacity-0');
+            setTimeout(() => backdrop.classList.add('hidden'), 300);
+        }
 
-        // Mobile Menu Toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navMenu = document.querySelector('.nav-menu');
+        btn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        backdrop.addEventListener('click', closeMenu);
 
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
+        links.forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
 
-        // Close mobile menu on link click
-        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-            menuToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-        }));
+        // ------------------------------------------------
+        // Three.js Background Scene (Visuals Only)
+        // ------------------------------------------------
+        const canvasContainer = document.getElementById('canvas-container');
+        
+        if (typeof THREE !== 'undefined') {
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x0f172a, 0.002);
 
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 50;
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            canvasContainer.appendChild(renderer.domElement);
+
+            // Particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 600; 
+            const posArray = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 150; 
             }
-        });
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const material = new THREE.PointsMaterial({ size: 0.3, color: 0x38bdf8, transparent: true, opacity: 0.6 });
+            const particlesMesh = new THREE.Points(particlesGeometry, material);
+            scene.add(particlesMesh);
+
+            // Secondary Particles
+            const particlesGeometry2 = new THREE.BufferGeometry();
+            const posArray2 = new Float32Array(particlesCount * 3);
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray2[i] = (Math.random() - 0.5) * 120; 
+            }
+            particlesGeometry2.setAttribute('position', new THREE.BufferAttribute(posArray2, 3));
+            const material2 = new THREE.PointsMaterial({ size: 0.2, color: 0x818cf8, transparent: true, opacity: 0.4 });
+            const particlesMesh2 = new THREE.Points(particlesGeometry2, material2);
+            scene.add(particlesMesh2);
+
+            // Mouse Interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            document.addEventListener('mousemove', (event) => {
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+            });
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            const clock = new THREE.Clock();
+
+            const tick = () => {
+                const elapsedTime = clock.getElapsedTime();
+                
+                // Slower, smoother background movement
+                particlesMesh.rotation.y = elapsedTime * 0.03;
+                particlesMesh2.rotation.y = elapsedTime * 0.02 + 1;
+
+                // Slight parallax
+                const targetX = (mouseX / window.innerWidth) * 2 - 1;
+                const targetY = -(mouseY / window.innerHeight) * 2 + 1;
+                
+                camera.position.x += (targetX * 1 - camera.position.x) * 0.05;
+                camera.position.y += (targetY * 1 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+
+                renderer.render(scene, camera);
+                window.requestAnimationFrame(tick);
+            }
+            tick();
+        }
     </script>
 </body>
 </html>

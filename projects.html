@@ -1,520 +1,686 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المشاريع | Turki Almutairi</title>
     
-    <!-- Primary Meta Tags -->
-    <title>Projects | Turki Nasser Al-Mutairi DS</title>
-    <meta name="title" content="Projects | Turki Nasser Al-Mutairi DS">
-    <meta name="description" content="Explore the Data Science, Machine Learning, and AI projects of Turki Nasser Al-Mutairi (DS). Featuring Python, Java, and Data Analysis portfolios.">
-    <meta name="keywords" content="Data Science Projects, Machine Learning Portfolio, AI Projects, Python Projects, Turki Nasser Al-Mutairi, DS, مشاريع علم البيانات, مشاريع ذكاء اصطناعي">
-    <meta name="author" content="Turki Nasser Al-Mutairi">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://data-student.software/projects.html">
-    <meta property="og:title" content="Projects | Turki Nasser Al-Mutairi DS">
-    <meta property="og:description" content="Explore the Data Science, Machine Learning, and AI projects of Turki Nasser Al-Mutairi (DS).">
-    <meta property="og:image" content="https://data-student.software/imgs/Dashboard.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://data-student.software/projects.html">
-    <meta property="twitter:title" content="Projects | Turki Nasser Al-Mutairi DS">
-    <meta property="twitter:description" content="Explore the Data Science, Machine Learning, and AI projects of Turki Nasser Al-Mutairi (DS).">
-    <meta property="twitter:image" content="https://data-student.software/imgs/Dashboard.png">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://data-student.software/projects.html">
-
-    <link rel="stylesheet" href="styles.css"/>
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- FontAwesome -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Tajawal) -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Required Libraries (Three.js Only - No GSAP/Animation Libs) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
-        /* Projects Page Specific Styles */
-        .projects-page-header {
-            padding-top: 120px;
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .projects-page-title {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .projects-page-desc {
-            color: #ccc;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        .search-filter-container {
-            max-width: 1200px;
-            margin: 0 auto 3rem;
-            padding: 0 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .search-box {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 1rem 3rem 1rem 1.5rem;
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            overflow-x: hidden;
             color: #fff;
-            font-size: 1rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s;
         }
 
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 15px rgba(0, 173, 181, 0.3);
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 4px;
         }
 
-        .search-box i {
-            position: absolute;
-            right: 1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary-color);
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(30, 41, 59, 0.85); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .filter-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .filter-tag {
-            padding: 0.5rem 1.5rem;
+        
+        .glass-card {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            color: #ccc;
-            cursor: pointer;
-            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .filter-tag:hover, .filter-tag.active {
-            background: var(--primary-color);
-            color: #222831;
-            font-weight: 600;
+        .glass-card:hover {
+            transform: translateY(-2px);
+            border-color: #38bdf8;
+            box-shadow: 0 4px 20px -5px rgba(56, 189, 248, 0.2);
         }
 
-        .all-projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem 4rem;
-        }
-
-        .back-home {
+        /* 3D Canvas Container */
+        #canvas-container {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--primary-color);
-            color: #222831;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 5px 15px rgba(0, 173, 181, 0.4);
-            z-index: 100;
-            transition: all 0.3s;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.5;
         }
 
-        .back-home:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 173, 181, 0.6);
+        /* Typography Gradient */
+        .text-gradient {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 4rem;
-            background: var(--card-bg);
-            border-radius: 20px;
-            border: 1px solid var(--glass-border);
-            display: none;
+        /* Scroll Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
-
-        .empty-state i {
-            font-size: 4rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body>
+<body class="antialiased selection:bg-cyan-500 selection:text-white">
 
-    <!-- Background Animation -->
-    <div class="bg-animation">
-        <div id="stars"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
-    </div>
+    <!-- 3D Background -->
+    <div id="canvas-container"></div>
 
     <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">Turki<span class="dot">.</span></a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <nav class="fixed w-full z-50 glass border-b border-white/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-code text-cyan-400"></i>
+                <div>Turki<span class="text-cyan-400">Almutairi</span></div>
+            </a>
+            <div class="hidden md:flex space-x-8 space-x-reverse">
+                <a href="index.html" class="hover:text-cyan-400 transition-colors">الرئيسية</a>
+                <a href="index.html#about" class="hover:text-cyan-400 transition-colors">عني</a>
+                <a href="index.html#skills" class="hover:text-cyan-400 transition-colors">المهارات</a>
+                <a href="#" class="text-cyan-400 transition-colors">المشاريع</a>
+                <a href="#contact" class="bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-2 rounded-full transition-all shadow-lg shadow-cyan-500/30">تواصل معي</a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="projects.html" class="nav-link active">Projects</a></li>
-                <li><a href="index.html#about" class="nav-link">About</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                <li class="theme-switch-wrapper">
-                    <label class="theme-switch" for="checkbox">
-                        <input type="checkbox" id="checkbox" />
-                        <div class="slider round">
-                            <i class="fas fa-sun icon sun"></i>
-                            <i class="fas fa-moon icon moon"></i>
-                        </div>
-                    </label>
-                </li>
-            </ul>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none z-50 p-2">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
         </div>
     </nav>
 
-    <header class="projects-page-header" data-aos="fade-down">
-        <h1 class="projects-page-title">All Projects</h1>
-        <p class="projects-page-desc">Explore my complete portfolio of data science, machine learning, and software development projects.</p>
-    </header>
+    <!-- Mobile Menu Backdrop -->
+    <div id="mobile-backdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[55] hidden transition-opacity duration-300 opacity-0"></div>
 
-    <div class="search-filter-container" data-aos="fade-up">
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search projects...">
-            <i class="fas fa-search"></i>
-        </div>
-        <div class="filter-tags">
-            <span class="filter-tag active" data-filter="all">All</span>
-            <span class="filter-tag" data-filter="data-analysis">Data Analysis</span>
-            <span class="filter-tag" data-filter="python">Python</span>
-            <span class="filter-tag" data-filter="machine-learning">Machine Learning</span>
-            <span class="filter-tag" data-filter="java">Java</span>
-            <span class="filter-tag" data-filter="web">Web Dev</span>
-        </div>
-    </div>
+    <!-- Mobile Menu Drawer -->
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[280px] bg-[#0f172a] border-l border-white/10 z-[60] transform translate-x-full transition-transform duration-300 shadow-2xl">
+        <div class="p-6 flex flex-col h-full">
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+                    <span class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-code text-cyan-400"></i> القائمة
+                    </span>
+                    <button id="close-menu-btn" class="text-slate-400 hover:text-white transition-colors p-2">
+                        <i class="fa-solid fa-xmark text-2xl"></i>
+                    </button>
+                </div>
 
-    <div class="all-projects-grid" id="projectsGrid">
-        <!-- Project 1 -->
-        <div class="project-card" data-category="data-analysis python" data-aos="fade-up">
-            <div class="project-img">
-                <img src="imgs/Google Stock Prices.png" alt="Google Stock Analysis">
-                <div class="project-overlay">
-                    <div class="project-links">
-                        <a href="https://github.com/turki013/Google-stock-by-year" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                <!-- Links -->
+                <div class="flex flex-col space-y-2 flex-1">
+                    <a href="index.html" class="flex items-center gap-4 text-lg text-slate-300 hover:text-cyan-400 hover:bg-white/5 p-3 rounded-xl transition-all mobile-link group">
+                        <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                            <i class="fa-solid fa-house text-sm group-hover:text-cyan-400"></i>
+                        </div>
+                        الرئيسية
+                    </a>
+                    <a href="index.html#about" class="flex items-center gap-4 text-lg text-slate-300 hover:text-cyan-400 hover:bg-white/5 p-3 rounded-xl transition-all mobile-link group">
+                        <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                            <i class="fa-solid fa-user text-sm group-hover:text-cyan-400"></i>
+                        </div>
+                        عني
+                    </a>
+                    <a href="index.html#skills" class="flex items-center gap-4 text-lg text-slate-300 hover:text-cyan-400 hover:bg-white/5 p-3 rounded-xl transition-all mobile-link group">
+                        <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                            <i class="fa-solid fa-code text-sm group-hover:text-cyan-400"></i>
+                        </div>
+                        المهارات
+                    </a>
+                    <a href="#" class="flex items-center gap-4 text-lg text-slate-300 hover:text-cyan-400 hover:bg-white/5 p-3 rounded-xl transition-all mobile-link group">
+                        <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                            <i class="fa-solid fa-briefcase text-sm group-hover:text-cyan-400"></i>
+                        </div>
+                        المشاريع
+                    </a>
+                </div>
+
+                <!-- Footer Action -->
+                <div class="mt-auto pt-6 border-t border-white/10">
+                    <a href="#contact" class="flex justify-center items-center gap-2 w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white py-3 rounded-xl font-bold shadow-lg shadow-cyan-500/20 transition-all mobile-link">
+                        <i class="fa-solid fa-envelope"></i> تواصل معي
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    <!-- Projects Header -->
+    <section class="pt-32 pb-12 relative z-10">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">معرض <span class="text-gradient">المشاريع</span></h1>
+            <p class="text-slate-400 max-w-2xl mx-auto">
+                مجموعة من المشاريع التي قمت بتنفيذها في مجالات علم البيانات، الذكاء الاصطناعي، وتطوير البرمجيات.
+            </p>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section id="projects" class="pb-20 relative z-10 reveal">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <a href="https://github.com/turki013/Real-vs-AI-Generated" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-cyan-500/10 rounded-lg">
+                            <i class="fa-solid fa-check-double text-2xl text-cyan-400"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">05/2025</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Real vs AI Generated</h3>
+                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                        تطبيق بايثون يقوم بتصور بيانات تغريدات المشاهير ومقارنتها بالتغريدات المولدة بواسطة الذكاء الاصطناعي باستخدام المخططات البيانية.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Python</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Pandas</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Matplotlib</span>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="https://github.com/turki013/Electric-car-sales" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-green-500/10 rounded-lg">
+                            <i class="fa-solid fa-charging-station text-2xl text-green-400"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">CLI App</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Electric Car Sales</h3>
+                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                        تطبيق سطر أوامر (Command-line) لتصور بيانات المركبات الكهربائية بطرق مختلفة (Bar charts, Scatter plots).
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Data Analysis</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Visualization</span>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="https://github.com/turki013/Google-stock-by-year" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-yellow-500/10 rounded-lg">
+                            <i class="fa-solid fa-arrow-trend-up text-2xl text-yellow-400"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">Finance</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Google Stock Analysis</h3>
+                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                        مشروع لاستكشاف أسعار أسهم جوجل التاريخية منذ 2004، وتصور تطور حجم التداول سنة بعد سنة.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Pandas</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Matplotlib</span>
+                    </div>
+                </a>
+
+                <!-- Project 4: Saudi Schools -->
+                <a href="https://github.com/turki013/Saudi-Schools-DataAnalysis-2025" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-blue-500/10 rounded-lg">
+                            <i class="fa-solid fa-chart-pie text-2xl text-blue-400"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">Dashboard</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Saudi Schools Analysis</h3>
+                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                        لوحة تحكم تفاعلية لتحليل الإحصاءات التعليمية والاتجاهات الديموغرافية في المملكة العربية السعودية.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Dashboard</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Education</span>
+                    </div>
+                </a>
+
+                <!-- Project 5: Account Manager -->
+                <a href="https://github.com/turki013/Account-Manager" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-indigo-500/10 rounded-lg">
+                            <i class="fa-solid fa-lock text-2xl text-indigo-400"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">Security</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Account Manager</h3>
+                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                        نظام إدارة حسابات مبني بلغة بايثون مع ميزات المصادقة ومعالجة البيانات بشكل آمن.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Python</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Tkinter</span>
+                    </div>
+                </a>
+
+                <!-- Project 6: Banking System -->
+                <a href="https://github.com/turki013/Bank-System" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-orange-500/10 rounded-lg">
+                            <i class="fa-solid fa-building-columns text-2xl text-orange-400"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">Java App</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Banking System</h3>
+                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                        نظام بنكي متكامل مبني بلغة جافا، يتميز بإدارة الحسابات والمعاملات الآمنة.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Java</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">OOP</span>
+                    </div>
+                </a>
+
+                <!-- Project 7: University Manager -->
+                <a href="https://github.com/turki013/University-System" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-teal-500/10 rounded-lg">
+                            <i class="fa-solid fa-graduation-cap text-2xl text-teal-400"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">Management</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">University Manager</h3>
+                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                        نظام إدارة جامعي للتعامل مع سجلات الطلاب، المقررات، وبيانات أعضاء هيئة التدريس.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Java</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Database</span>
+                    </div>
+                </a>
+
+                <!-- Project 4 (Placeholder for more) -->
+                <div class="glass-card rounded-2xl overflow-hidden p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-purple-500/10 rounded-lg">
+                            <i class="fa-solid fa-robot text-2xl text-purple-400"></i>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">Coming Soon</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">مشروع قادم</h3>
+                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                        مشروع جديد في مجال التعلم العميق (Deep Learning) يجري العمل عليه حالياً.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">TensorFlow</span>
+                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Python</span>
                     </div>
                 </div>
-            </div>
-            <div class="project-content">
-                <h3>Google Stock Analysis</h3>
-                <p>Comprehensive analysis of Google stock price trends using advanced data visualization and statistical modeling techniques.</p>
-                <div class="project-tags">
-                    <span>Python</span>
-                    <span>Pandas</span>
-                    <span>Matplotlib</span>
-                </div>
+
             </div>
         </div>
+    </section>
 
-        <!-- Project 2 -->
-        <div class="project-card" data-category="data-analysis python" data-aos="fade-up" data-aos-delay="100">
-            <div class="project-img">
-                <img src="imgs/Electric Vehicle Sales & Stock Visualizer.png" alt="EV Analysis">
-                <div class="project-overlay">
-                    <div class="project-links">
-                        <a href="https://github.com/turki013/Electric-car-sales" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative z-10 reveal">
+        <div class="container mx-auto px-6">
+            <div class="glass p-10 rounded-3xl border border-cyan-500/30">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Contact Info -->
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6">تواصل معي</h2>
+                        <p class="text-slate-300 mb-8 leading-relaxed">
+                            أنا متاح دائماً لمناقشة مشاريع جديدة، أفكار إبداعية، أو فرص للتعاون. لا تتردد في التواصل معي.
+                        </p>
+                        <div class="space-y-6">
+                            <a href="mailto:trkee112299@gmail.com" class="flex items-center gap-4 text-slate-300 hover:text-white transition-colors group">
+                                <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                                    <i class="fa-solid fa-envelope text-cyan-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-400">البريد الإلكتروني</p>
+                                    <p class="font-semibold">trkee112299@gmail.com</p>
+                                </div>
+                            </a>
+                            <div class="flex items-center gap-4 text-slate-300 group">
+                                <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-green-500/20 transition-colors">
+                                    <i class="fa-solid fa-phone text-green-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-400">رقم الهاتف</p>
+                                    <p class="font-semibold">0550494319</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-slate-300 group">
+                                <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center group-hover:bg-red-500/20 transition-colors">
+                                    <i class="fa-solid fa-location-dot text-red-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-slate-400">الموقع</p>
+                                    <p class="font-semibold">الرياض، المملكة العربية السعودية</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="project-content">
-                <h3>EV Market Analysis</h3>
-                <p>Data analysis of electric vehicle market trends using Python and Pandas with interactive dashboards.</p>
-                <div class="project-tags">
-                    <span>Python</span>
-                    <span>Data Viz</span>
-                    <span>Pandas</span>
+
+                    <!-- Contact Form -->
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">الاسم</label>
+                            <input type="text" id="name" required class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors" placeholder="اسمك الكريم">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">البريد الإلكتروني</label>
+                            <input type="email" id="email" required class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors" placeholder="example@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">الرسالة</label>
+                            <textarea id="message" required rows="4" class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors" placeholder="اكتب رسالتك هنا..."></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-cyan-500/20 transition-all transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                            <span id="btn-text">إرسال الرسالة</span>
+                            <i id="btn-icon" class="fa-solid fa-paper-plane"></i>
+                            <i id="btn-loader" class="fa-solid fa-circle-notch fa-spin hidden"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Project 3 -->
-        <div class="project-card" data-category="data-analysis python" data-aos="fade-up" data-aos-delay="200">
-            <div class="project-img">
-                <img src="imgs/Dashboard.png" alt="Saudi Schools Dashboard">
-                <div class="project-overlay">
-                    <div class="project-links">
-                        <a href="https://github.com/turki013/Saudi-Schools-DataAnalysis-2025" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-content">
-                <h3>Saudi Schools Analysis</h3>
-                <p>Interactive dashboard analyzing Saudi Arabian educational statistics and demographic trends.</p>
-                <div class="project-tags">
-                    <span>Dashboard</span>
-                    <span>Education</span>
-                    <span>Analytics</span>
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="py-6 border-t border-white/10 relative z-10 bg-slate-900/90">
+        <div class="container mx-auto px-6 text-center text-slate-500 text-sm">
+            <p>© 2025 تركي ناصر المطيري. جميع الحقوق محفوظة.</p>
         </div>
-
-        <!-- Project 4 -->
-        <div class="project-card" data-category="python data-analysis" data-aos="fade-up">
-            <div class="project-img">
-                <img src="imgs/Ai-vs-Real.png" alt="AI vs Real">
-                <div class="project-overlay">
-                    <div class="project-links">
-                        <a href="https://github.com/turki013/Real-vs-AI-Generated" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-content">
-                <h3>AI vs Real Content</h3>
-                <p>Analysis of patterns distinguishing AI-generated content from human-created content.</p>
-                <div class="project-tags">
-                    <span>Python</span>
-                    <span>AI/ML</span>
-                    <span>Research</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project 5 -->
-        <div class="project-card" data-category="python" data-aos="fade-up" data-aos-delay="100">
-            <div class="project-img">
-                <img src="imgs/Account.png" alt="Account Manager">
-                <div class="project-overlay">
-                    <div class="project-links">
-                        <a href="https://github.com/turki013/Account-Manager" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-content">
-                <h3>Account Manager</h3>
-                <p>Python-based account management system with user authentication and secure data handling.</p>
-                <div class="project-tags">
-                    <span>Python</span>
-                    <span>Tkinter</span>
-                    <span>Security</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project 6 -->
-        <div class="project-card" data-category="java" data-aos="fade-up" data-aos-delay="200">
-            <div class="project-img">
-                <img src="imgs/BankSystem.png" alt="Banking System">
-                <div class="project-overlay">
-                    <div class="project-links">
-                        <a href="https://github.com/turki013/Bank-System" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-content">
-                <h3>Banking System</h3>
-                <p>Full-featured banking system built with Java, featuring account management and secure transactions.</p>
-                <div class="project-tags">
-                    <span>Java</span>
-                    <span>OOP</span>
-                    <span>Banking</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project 7 -->
-        <div class="project-card" data-category="java" data-aos="fade-up">
-            <div class="project-img">
-                <img src="imgs/UniversitySystem.png" alt="University System">
-                <div class="project-overlay">
-                    <div class="project-links">
-                        <a href="https://github.com/turki013/University-System" target="_blank"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-content">
-                <h3>University Manager</h3>
-                <p>University administration system handling student records, courses, and faculty data.</p>
-                <div class="project-tags">
-                    <span>Java</span>
-                    <span>Database</span>
-                    <span>Management</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Empty State for Filtering -->
-        <div class="empty-state" id="emptyState">
-            <i class="fas fa-robot"></i>
-            <h3>Coming Soon</h3>
-            <p>New projects in this category are currently in development.</p>
-        </div>
-
-    </div>
-
-    <a href="index.html" class="back-home">
-        <i class="fas fa-arrow-left"></i>
-    </a>
-
-    <footer>
-        <p>&copy; 2025 Turki Al-Mutairi. All Rights Reserved.</p>
     </footer>
 
+    <!-- Notification Toast -->
+    <div id="notification-toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4 px-6 py-4 bg-slate-800/90 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl translate-y-32 opacity-0 transition-all duration-500 z-[100] min-w-[320px]">
+        <div id="toast-icon-container" class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+            <i id="toast-icon" class="fa-solid fa-check text-green-400 text-xl"></i>
+        </div>
+        <div>
+            <h4 id="toast-title" class="font-bold text-white text-lg">تم الإرسال!</h4>
+            <p id="toast-message" class="text-sm text-slate-300">شكراً لتواصلك، سيتم الرد عليك قريباً.</p>
+        </div>
+    </div>
+
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
+    <script type="module">
+        // ------------------------------------------------
+        // Firebase Configuration & Logic
+        // ------------------------------------------------
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+        // ⚠️ استبدل البيانات التالية ببيانات مشروعك من Firebase Console
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXdwMw9m8S0AGUsYY5wxcyT2lVF-udPMI",
+            authDomain: "portfolio-2aca4.firebaseapp.com",
+            databaseURL: "https://portfolio-2aca4-default-rtdb.firebaseio.com",
+            projectId: "portfolio-2aca4",
+            storageBucket: "portfolio-2aca4.firebasestorage.app",
+            messagingSenderId: "257395634614",
+            appId: "1:257395634614:web:2b27332e2527d5e5ced117",
+            measurementId: "G-0XJ5SD044W"
+        };
+
+        // Initialize Firebase
+        let app, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getDatabase(app);
+        } catch (error) {
+            console.log("Firebase Config Placeholder - Please update with real keys");
+        }
+
+        // ------------------------------------------------
+        // Notification System
+        // ------------------------------------------------
+        const toast = document.getElementById('notification-toast');
+        const toastTitle = document.getElementById('toast-title');
+        const toastMessage = document.getElementById('toast-message');
+        const toastIcon = document.getElementById('toast-icon');
+        const toastIconContainer = document.getElementById('toast-icon-container');
+
+        window.showNotification = function(type, title, message) {
+            // Configure styles based on type
+            if (type === 'success') {
+                toastIconContainer.className = 'w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center shrink-0';
+                toastIcon.className = 'fa-solid fa-check text-green-400 text-xl';
+            } else if (type === 'error') {
+                toastIconContainer.className = 'w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center shrink-0';
+                toastIcon.className = 'fa-solid fa-xmark text-red-400 text-xl';
             }
-        });
 
-        // Mobile Menu
-        const menuToggle = document.getElementById('mobile-menu');
-        const navMenu = document.querySelector('.nav-menu');
+            // Set Content
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
 
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
+            // Show Toast
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            
+            // Hide after 4 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 4000);
+        }
 
-        // Filter Functionality
-        const filterTags = document.querySelectorAll('.filter-tag');
-        const projectCards = document.querySelectorAll('.project-card');
-        const emptyState = document.getElementById('emptyState');
+        // ------------------------------------------------
+        // Form Handling
+        // ------------------------------------------------
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnIcon = document.getElementById('btn-icon');
+        const btnLoader = document.getElementById('btn-loader');
 
-        filterTags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                // Remove active class from all
-                filterTags.forEach(t => t.classList.remove('active'));
-                // Add active to clicked
-                tag.classList.add('active');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-                const filter = tag.getAttribute('data-filter');
-                let hasVisibleProjects = false;
+                // UI Loading State
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                btnText.textContent = 'جاري الإرسال...';
+                btnIcon.classList.add('hidden');
+                btnLoader.classList.remove('hidden');
 
-                projectCards.forEach(card => {
-                    const categories = card.getAttribute('data-category');
-                    if (filter === 'all' || categories.includes(filter)) {
-                        card.style.display = 'block';
-                        // Re-trigger AOS
-                        card.classList.remove('aos-animate');
-                        setTimeout(() => card.classList.add('aos-animate'), 50);
-                        hasVisibleProjects = true;
-                    } else {
-                        card.style.display = 'none';
+                // Get Values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                try {
+                    // Check if Firebase is configured (Simple check)
+                    if (firebaseConfig.apiKey.includes("YOUR_API_KEY")) {
+                        throw new Error("يرجى إعداد Firebase أولاً في الكود");
                     }
-                });
 
-                if (!hasVisibleProjects) {
-                    emptyState.style.display = 'block';
-                } else {
-                    emptyState.style.display = 'none';
+                    // Timeout Promise to prevent hanging
+                    const timeout = new Promise((_, reject) => {
+                        setTimeout(() => reject(new Error("NetworkTimeout")), 5000);
+                    });
+
+                    // Push to Firebase with Timeout
+                    const messagesRef = ref(db, 'messages');
+                    await Promise.race([
+                        push(messagesRef, {
+                            name: name,
+                            email: email,
+                            message: message,
+                            timestamp: serverTimestamp()
+                        }),
+                        timeout
+                    ]);
+
+                    // Success
+                    showNotification('success', 'تم الإرسال بنجاح!', 'شكراً لتواصلك، سيتم الرد عليك قريباً.');
+                    contactForm.reset();
+
+                } catch (error) {
+                    console.error("Error:", error);
+                    
+                    if (error.message === "NetworkTimeout") {
+                        showNotification('error', 'خطأ في الاتصال', 'يرجى التأكد من إنشاء "Realtime Database" في Firebase Console.');
+                    } else if (error.message.includes("Firebase")) {
+                        showNotification('error', 'تنبيه المطور', 'يجب ربط Firebase في الكود ليعمل النموذج فعلياً.');
+                    } else {
+                        showNotification('error', 'حدث خطأ!', 'لم نتمكن من إرسال الرسالة، حاول مرة أخرى.');
+                    }
+                } finally {
+                    // Reset UI
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                    btnText.textContent = 'إرسال الرسالة';
+                    btnIcon.classList.remove('hidden');
+                    btnLoader.classList.add('hidden');
                 }
             });
-        });
+        }
+    </script>
 
-        // Search Functionality
-        const searchInput = document.getElementById('searchInput');
+    <!-- Scripts -->
+    <script>
+        // ------------------------------------------------
+        // Scroll Animation Observer
+        // ------------------------------------------------
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            let hasVisibleProjects = false;
-
-            projectCards.forEach(card => {
-                const title = card.querySelector('h3').innerText.toLowerCase();
-                const desc = card.querySelector('p').innerText.toLowerCase();
-                const tags = card.querySelector('.project-tags').innerText.toLowerCase();
-
-                if (title.includes(searchTerm) || desc.includes(searchTerm) || tags.includes(searchTerm)) {
-                    card.style.display = 'block';
-                    hasVisibleProjects = true;
-                } else {
-                    card.style.display = 'none';
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
                 }
             });
+        }, observerOptions);
 
-            if (!hasVisibleProjects) {
-                emptyState.style.display = 'block';
-                emptyState.querySelector('h3').innerText = 'No Projects Found';
-                emptyState.querySelector('p').innerText = 'Try adjusting your search terms.';
-            } else {
-                emptyState.style.display = 'none';
-            }
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
         });
 
-        // Theme Switcher Logic
-        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-        const currentTheme = localStorage.getItem('theme');
+        // ------------------------------------------------
+        // Mobile Menu Logic
+        // ------------------------------------------------
+        const btn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const backdrop = document.getElementById('mobile-backdrop');
+        const links = document.querySelectorAll('.mobile-link');
 
-        if (currentTheme) {
-            document.body.classList.add(currentTheme);
-
-            if (currentTheme === 'light-mode') {
-                toggleSwitch.checked = true;
-            }
+        function openMenu() {
+            menu.classList.remove('translate-x-full');
+            backdrop.classList.remove('hidden');
+            // Small delay to allow display:block to apply before opacity transition
+            setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
         }
 
-        function switchTheme(e) {
-            if (e.target.checked) {
-                document.body.classList.add('light-mode');
-                localStorage.setItem('theme', 'light-mode');
-            } else {
-                document.body.classList.remove('light-mode');
-                localStorage.setItem('theme', 'dark-mode');
-            }
+        function closeMenu() {
+            menu.classList.add('translate-x-full');
+            backdrop.classList.add('opacity-0');
+            setTimeout(() => backdrop.classList.add('hidden'), 300);
         }
 
-        toggleSwitch.addEventListener('change', switchTheme);
+        btn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        backdrop.addEventListener('click', closeMenu);
 
-        // Mobile Menu Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
+        links.forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
+
+        // ------------------------------------------------
+        // Three.js Background Scene (Visuals Only)
+        // ------------------------------------------------
+        const canvasContainer = document.getElementById('canvas-container');
+        
+        if (typeof THREE !== 'undefined') {
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x0f172a, 0.002);
+
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 50;
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            canvasContainer.appendChild(renderer.domElement);
+
+            // Particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 600; 
+            const posArray = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 150; 
+            }
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const material = new THREE.PointsMaterial({ size: 0.3, color: 0x38bdf8, transparent: true, opacity: 0.6 });
+            const particlesMesh = new THREE.Points(particlesGeometry, material);
+            scene.add(particlesMesh);
+
+            // Secondary Particles
+            const particlesGeometry2 = new THREE.BufferGeometry();
+            const posArray2 = new Float32Array(particlesCount * 3);
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray2[i] = (Math.random() - 0.5) * 120; 
+            }
+            particlesGeometry2.setAttribute('position', new THREE.BufferAttribute(posArray2, 3));
+            const material2 = new THREE.PointsMaterial({ size: 0.2, color: 0x818cf8, transparent: true, opacity: 0.4 });
+            const particlesMesh2 = new THREE.Points(particlesGeometry2, material2);
+            scene.add(particlesMesh2);
+
+            // Mouse Interaction
+            let mouseX = 0;
+            let mouseY = 0;
+            document.addEventListener('mousemove', (event) => {
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+            });
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            const clock = new THREE.Clock();
+
+            const tick = () => {
+                const elapsedTime = clock.getElapsedTime();
+                
+                // Slower, smoother background movement
+                particlesMesh.rotation.y = elapsedTime * 0.03;
+                particlesMesh2.rotation.y = elapsedTime * 0.02 + 1;
+
+                // Slight parallax
+                const targetX = (mouseX / window.innerWidth) * 2 - 1;
+                const targetY = -(mouseY / window.innerHeight) * 2 + 1;
+                
+                camera.position.x += (targetX * 1 - camera.position.x) * 0.05;
+                camera.position.y += (targetY * 1 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+
+                renderer.render(scene, camera);
+                window.requestAnimationFrame(tick);
+            }
+            tick();
+        }
     </script>
 </body>
 </html>
