@@ -107,6 +107,15 @@
             box-shadow: 0 4px 20px -5px rgba(56, 189, 248, 0.2);
         }
 
+        /* Line Clamp */
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
         /* 3D Canvas Container */
         #canvas-container {
             position: fixed;
@@ -136,6 +145,43 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Custom Notification Styles */
+        .notification {
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translate(-50%, 100px);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-content {
+            animation: scaleIn 0.3s ease-out;
+        }
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-cyan-500 selection:text-white">
@@ -150,11 +196,16 @@
                 <i class="fa-solid fa-code text-cyan-400"></i>
                 <div>Turki<span class="text-cyan-400">Almutairi</span></div>
             </a>
-            <div class="hidden md:flex space-x-8 space-x-reverse">
+            <div class="hidden md:flex space-x-8 space-x-reverse items-center">
                 <a href="index.html" class="hover:text-cyan-400 transition-colors">الرئيسية</a>
                 <a href="index.html#about" class="hover:text-cyan-400 transition-colors">عني</a>
                 <a href="index.html#skills" class="hover:text-cyan-400 transition-colors">المهارات</a>
                 <a href="#" class="text-cyan-400 transition-colors">المشاريع</a>
+                <!-- Admin Add Project Button (Hidden by default) -->
+                <button id="add-project-nav-btn" class="hidden items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-4 py-2 rounded-full transition-all shadow-lg shadow-green-500/30 text-sm font-medium">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>إضافة مشروع</span>
+                </button>
                 <a href="#contact" class="bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-2 rounded-full transition-all shadow-lg shadow-cyan-500/30">تواصل معي</a>
             </div>
 
@@ -210,7 +261,11 @@
                 </div>
 
                 <!-- Footer Action -->
-                <div class="mt-auto pt-6 border-t border-white/10">
+                <div class="mt-auto pt-6 border-t border-white/10 space-y-3">
+                    <!-- Mobile Add Project Button (Hidden by default) -->
+                    <button id="add-project-mobile-btn" class="hidden w-full justify-center items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-3 rounded-xl font-bold shadow-lg shadow-green-500/20 transition-all">
+                        <i class="fa-solid fa-plus"></i> إضافة مشروع
+                    </button>
                     <a href="#contact" class="flex justify-center items-center gap-2 w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white py-3 rounded-xl font-bold shadow-lg shadow-cyan-500/20 transition-all mobile-link">
                         <i class="fa-solid fa-envelope"></i> تواصل معي
                     </a>
@@ -219,27 +274,97 @@
         </div>
 
     <!-- Projects Header -->
-    <section class="pt-32 pb-12 relative z-10">
+    <section class="pt-32 pb-8 relative z-10">
         <div class="container mx-auto px-6 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">معرض <span class="text-gradient">المشاريع</span></h1>
-            <p class="text-slate-400 max-w-2xl mx-auto">
+            <p class="text-slate-400 max-w-2xl mx-auto mb-8">
                 مجموعة من المشاريع التي قمت بتنفيذها في مجالات علم البيانات، الذكاء الاصطناعي، وتطوير البرمجيات.
             </p>
+            
+            <!-- Search Bar -->
+            <div class="max-w-xl mx-auto mb-8">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="ابحث عن مشروع..." 
+                        class="w-full bg-slate-800/50 border border-slate-700 rounded-2xl px-6 py-4 pr-14 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500 transition-colors">
+                    <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                </div>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="flex flex-wrap justify-center gap-3 mb-4">
+                <button data-category="all" class="category-btn active px-6 py-2 rounded-full border border-slate-600 bg-cyan-500 text-white font-medium transition-all hover:bg-cyan-600">
+                    <i class="fa-solid fa-th-large ml-2"></i>الكل
+                </button>
+                <button data-category="web" class="category-btn px-6 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300 font-medium transition-all hover:border-cyan-500 hover:text-cyan-400">
+                    <i class="fa-solid fa-globe ml-2"></i>Web
+                </button>
+                <button data-category="data-science" class="category-btn px-6 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300 font-medium transition-all hover:border-green-500 hover:text-green-400">
+                    <i class="fa-solid fa-chart-line ml-2"></i>Data Science
+                </button>
+                <button data-category="ml" class="category-btn px-6 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300 font-medium transition-all hover:border-yellow-500 hover:text-yellow-400">
+                    <i class="fa-solid fa-brain ml-2"></i>ML
+                </button>
+                <button data-category="ai" class="category-btn px-6 py-2 rounded-full border border-slate-600 bg-slate-800/50 text-slate-300 font-medium transition-all hover:border-purple-500 hover:text-purple-400">
+                    <i class="fa-solid fa-robot ml-2"></i>AI
+                </button>
+            </div>
         </div>
     </section>
 
     <!-- Projects Grid -->
     <section id="projects" class="pb-20 relative z-10 reveal">
         <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8">
+            
+            <!-- No Results Message -->
+            <div id="no-results" class="hidden text-center py-16">
+                <i class="fa-solid fa-search text-6xl text-slate-600 mb-4"></i>
+                <h3 class="text-2xl font-bold text-slate-400 mb-2">لا توجد نتائج</h3>
+                <p class="text-slate-500">حاول البحث بكلمات مختلفة أو اختر فئة أخرى</p>
+            </div>
+
+            <!-- Category Empty Messages -->
+            <div id="coming-soon-ai" class="hidden col-span-full text-center py-16">
+                <div class="glass-card rounded-2xl p-10 max-w-md mx-auto">
+                    <i class="fa-solid fa-robot text-6xl text-purple-400 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-white mb-2">قريباً</h3>
+                    <p class="text-slate-400">مشاريع الذكاء الاصطناعي قادمة قريباً...</p>
+                </div>
+            </div>
+            
+            <div id="coming-soon-ml" class="hidden col-span-full text-center py-16">
+                <div class="glass-card rounded-2xl p-10 max-w-md mx-auto">
+                    <i class="fa-solid fa-brain text-6xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-white mb-2">قريباً</h3>
+                    <p class="text-slate-400">مشاريع تعلم الآلة قادمة قريباً...</p>
+                </div>
+            </div>
+            
+            <div id="coming-soon-web" class="hidden col-span-full text-center py-16">
+                <div class="glass-card rounded-2xl p-10 max-w-md mx-auto">
+                    <i class="fa-solid fa-globe text-6xl text-cyan-400 mb-4"></i>
+                    <h3 class="text-2xl font-bold text-white mb-2">قريباً</h3>
+                    <p class="text-slate-400">مشاريع تطوير الويب قادمة قريباً...</p>
+                </div>
+            </div>
+
+            <div id="projects-grid" class="grid md:grid-cols-3 gap-8">
                 
-                <!-- Project 1 -->
-                <a href="https://github.com/turki013/Real-vs-AI-Generated" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                <!-- ==================== Data Science Projects ==================== -->
+                
+                <!-- Project: Real vs AI Generated -->
+                <a href="https://github.com/turki013/Real-vs-AI-Generated" target="_blank" 
+                   class="project-card glass-card rounded-2xl overflow-hidden p-6 block" 
+                   data-category="data-science" 
+                   data-title="Real vs AI Generated"
+                   data-tags="Python Pandas Matplotlib Data Visualization">
                     <div class="flex justify-between items-start mb-4">
-                        <div class="p-3 bg-cyan-500/10 rounded-lg">
-                            <i class="fa-solid fa-check-double text-2xl text-cyan-400"></i>
+                        <div class="p-3 bg-green-500/10 rounded-lg">
+                            <i class="fa-solid fa-check-double text-2xl text-green-400"></i>
                         </div>
-                        <span class="text-xs font-mono text-slate-400">05/2025</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Data Science</span>
+                            <span class="text-xs font-mono text-slate-400">05/2025</span>
+                        </div>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Real vs AI Generated</h3>
                     <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
@@ -251,14 +376,21 @@
                         <span class="text-xs bg-slate-700 px-2 py-1 rounded">Matplotlib</span>
                     </div>
                 </a>
-
-                <!-- Project 2 -->
-                <a href="https://github.com/turki013/Electric-car-sales" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                
+                <!-- Project: Electric Car Sales -->
+                <a href="https://github.com/turki013/Electric-car-sales" target="_blank" 
+                   class="project-card glass-card rounded-2xl overflow-hidden p-6 block" 
+                   data-category="data-science" 
+                   data-title="Electric Car Sales"
+                   data-tags="Data Analysis Visualization Python Charts">
                     <div class="flex justify-between items-start mb-4">
                         <div class="p-3 bg-green-500/10 rounded-lg">
                             <i class="fa-solid fa-charging-station text-2xl text-green-400"></i>
                         </div>
-                        <span class="text-xs font-mono text-slate-400">CLI App</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Data Science</span>
+                            <span class="text-xs font-mono text-slate-400">CLI App</span>
+                        </div>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Electric Car Sales</h3>
                     <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
@@ -270,13 +402,20 @@
                     </div>
                 </a>
 
-                <!-- Project 3 -->
-                <a href="https://github.com/turki013/Google-stock-by-year" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                <!-- Project: Google Stock Analysis -->
+                <a href="https://github.com/turki013/Google-stock-by-year" target="_blank" 
+                   class="project-card glass-card rounded-2xl overflow-hidden p-6 block" 
+                   data-category="data-science" 
+                   data-title="Google Stock Analysis"
+                   data-tags="Pandas Matplotlib Finance Stock Analysis">
                     <div class="flex justify-between items-start mb-4">
-                        <div class="p-3 bg-yellow-500/10 rounded-lg">
-                            <i class="fa-solid fa-arrow-trend-up text-2xl text-yellow-400"></i>
+                        <div class="p-3 bg-green-500/10 rounded-lg">
+                            <i class="fa-solid fa-arrow-trend-up text-2xl text-green-400"></i>
                         </div>
-                        <span class="text-xs font-mono text-slate-400">Finance</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Data Science</span>
+                            <span class="text-xs font-mono text-slate-400">Finance</span>
+                        </div>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Google Stock Analysis</h3>
                     <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
@@ -288,13 +427,20 @@
                     </div>
                 </a>
 
-                <!-- Project 4: Saudi Schools -->
-                <a href="https://github.com/turki013/Saudi-Schools-DataAnalysis-2025" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                <!-- Project: Saudi Schools Analysis -->
+                <a href="https://github.com/turki013/Saudi-Schools-DataAnalysis-2025" target="_blank" 
+                   class="project-card glass-card rounded-2xl overflow-hidden p-6 block" 
+                   data-category="data-science" 
+                   data-title="Saudi Schools Analysis"
+                   data-tags="Dashboard Education Python Data Analysis">
                     <div class="flex justify-between items-start mb-4">
-                        <div class="p-3 bg-blue-500/10 rounded-lg">
-                            <i class="fa-solid fa-chart-pie text-2xl text-blue-400"></i>
+                        <div class="p-3 bg-green-500/10 rounded-lg">
+                            <i class="fa-solid fa-chart-pie text-2xl text-green-400"></i>
                         </div>
-                        <span class="text-xs font-mono text-slate-400">Dashboard</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Data Science</span>
+                            <span class="text-xs font-mono text-slate-400">Dashboard</span>
+                        </div>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Saudi Schools Analysis</h3>
                     <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
@@ -306,13 +452,20 @@
                     </div>
                 </a>
 
-                <!-- Project 5: Account Manager -->
-                <a href="https://github.com/turki013/Account-Manager" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                <!-- Project: Account Manager -->
+                <a href="https://github.com/turki013/Account-Manager" target="_blank" 
+                   class="project-card glass-card rounded-2xl overflow-hidden p-6 block" 
+                   data-category="data-science" 
+                   data-title="Account Manager"
+                   data-tags="Python Tkinter GUI Desktop Application Security">
                     <div class="flex justify-between items-start mb-4">
-                        <div class="p-3 bg-indigo-500/10 rounded-lg">
-                            <i class="fa-solid fa-lock text-2xl text-indigo-400"></i>
+                        <div class="p-3 bg-green-500/10 rounded-lg">
+                            <i class="fa-solid fa-lock text-2xl text-green-400"></i>
                         </div>
-                        <span class="text-xs font-mono text-slate-400">Security</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Data Science</span>
+                            <span class="text-xs font-mono text-slate-400">Security</span>
+                        </div>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Account Manager</h3>
                     <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
@@ -324,13 +477,20 @@
                     </div>
                 </a>
 
-                <!-- Project 6: Banking System -->
-                <a href="https://github.com/turki013/Bank-System" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                <!-- Project: Banking System -->
+                <a href="https://github.com/turki013/Bank-System" target="_blank" 
+                   class="project-card glass-card rounded-2xl overflow-hidden p-6 block" 
+                   data-category="data-science" 
+                   data-title="Banking System"
+                   data-tags="Java OOP Desktop Application Banking">
                     <div class="flex justify-between items-start mb-4">
-                        <div class="p-3 bg-orange-500/10 rounded-lg">
-                            <i class="fa-solid fa-building-columns text-2xl text-orange-400"></i>
+                        <div class="p-3 bg-green-500/10 rounded-lg">
+                            <i class="fa-solid fa-building-columns text-2xl text-green-400"></i>
                         </div>
-                        <span class="text-xs font-mono text-slate-400">Java App</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Data Science</span>
+                            <span class="text-xs font-mono text-slate-400">Java App</span>
+                        </div>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Banking System</h3>
                     <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
@@ -342,13 +502,20 @@
                     </div>
                 </a>
 
-                <!-- Project 7: University Manager -->
-                <a href="https://github.com/turki013/University-System" target="_blank" class="glass-card rounded-2xl overflow-hidden p-6 block">
+                <!-- Project: University Manager -->
+                <a href="https://github.com/turki013/University-System" target="_blank" 
+                   class="project-card glass-card rounded-2xl overflow-hidden p-6 block" 
+                   data-category="data-science" 
+                   data-title="University Manager"
+                   data-tags="Java Database Management System University">
                     <div class="flex justify-between items-start mb-4">
-                        <div class="p-3 bg-teal-500/10 rounded-lg">
-                            <i class="fa-solid fa-graduation-cap text-2xl text-teal-400"></i>
+                        <div class="p-3 bg-green-500/10 rounded-lg">
+                            <i class="fa-solid fa-graduation-cap text-2xl text-green-400"></i>
                         </div>
-                        <span class="text-xs font-mono text-slate-400">Management</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Data Science</span>
+                            <span class="text-xs font-mono text-slate-400">Management</span>
+                        </div>
                     </div>
                     <h3 class="text-xl font-bold mb-2">University Manager</h3>
                     <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
@@ -360,25 +527,10 @@
                     </div>
                 </a>
 
-                <!-- Project 4 (Placeholder for more) -->
-                <div class="glass-card rounded-2xl overflow-hidden p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="p-3 bg-purple-500/10 rounded-lg">
-                            <i class="fa-solid fa-robot text-2xl text-purple-400"></i>
-                        </div>
-                        <span class="text-xs font-mono text-slate-400">Coming Soon</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">مشروع قادم</h3>
-                    <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
-                        مشروع جديد في مجال التعلم العميق (Deep Learning) يجري العمل عليه حالياً.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mt-2">
-                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">TensorFlow</span>
-                        <span class="text-xs bg-slate-700 px-2 py-1 rounded">Python</span>
-                    </div>
-                </div>
+                <!-- Firebase Dynamic Projects (inside grid) -->
 
             </div>
+            
         </div>
     </section>
 
@@ -467,13 +619,237 @@
         </div>
     </div>
 
+    <!-- Add Project Modal -->
+    <div id="add-project-modal" class="fixed inset-0 z-[200] hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm modal-overlay" id="modal-backdrop"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+            <div class="glass rounded-2xl p-4 sm:p-6 w-full max-w-4xl relative my-2 sm:my-4 modal-content max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+                <!-- Close Button -->
+                <button id="close-modal-btn" class="absolute top-2 sm:top-3 left-2 sm:left-3 text-slate-400 hover:text-white transition-colors z-10">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+                
+                <h2 class="text-lg sm:text-xl font-bold mb-4 flex items-center gap-2 pr-8">
+                    <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-plus text-green-400 text-sm"></i>
+                    </div>
+                    إضافة مشروع جديد
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
+                    <!-- Form Column -->
+                    <form id="add-project-form" class="space-y-4">
+                        <!-- Project Title -->
+                        <div>
+                            <label class="block text-slate-400 mb-1 text-xs">عنوان المشروع</label>
+                            <input type="text" id="project-title" required
+                                class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors"
+                                placeholder="مثال: تحليل بيانات المبيعات">
+                        </div>
+
+                        <!-- Project Description -->
+                        <div>
+                            <label class="block text-slate-400 mb-1 text-xs">وصف المشروع</label>
+                            <textarea id="project-description" required rows="2"
+                                class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                                placeholder="وصف مختصر للمشروع..."></textarea>
+                        </div>
+
+                        <!-- Project Link -->
+                        <div>
+                            <label class="block text-slate-400 mb-1 text-xs">رابط المشروع (GitHub)</label>
+                            <input type="url" id="project-link" required
+                                class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors"
+                                placeholder="https://github.com/username/project">
+                        </div>
+
+                        <!-- Category Selection -->
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-xs">الفئة</label>
+                            <div class="grid grid-cols-4 gap-2">
+                                <div class="category-option border border-white/10 rounded-lg p-2 text-center cursor-pointer transition-all hover:border-green-500" data-category="data-science">
+                                    <i class="fa-solid fa-chart-line text-lg text-green-400"></i>
+                                    <p class="text-[10px] mt-1">Data Science</p>
+                                </div>
+                                <div class="category-option border border-white/10 rounded-lg p-2 text-center cursor-pointer transition-all hover:border-yellow-500" data-category="ml">
+                                    <i class="fa-solid fa-brain text-lg text-yellow-400"></i>
+                                    <p class="text-[10px] mt-1">ML</p>
+                                </div>
+                                <div class="category-option border border-white/10 rounded-lg p-2 text-center cursor-pointer transition-all hover:border-purple-500" data-category="ai">
+                                    <i class="fa-solid fa-robot text-lg text-purple-400"></i>
+                                    <p class="text-[10px] mt-1">AI</p>
+                                </div>
+                                <div class="category-option border border-white/10 rounded-lg p-2 text-center cursor-pointer transition-all hover:border-cyan-500" data-category="web">
+                                    <i class="fa-solid fa-globe text-lg text-cyan-400"></i>
+                                    <p class="text-[10px] mt-1">Web</p>
+                                </div>
+                            </div>
+                            <input type="hidden" id="project-category">
+                        </div>
+
+                        <!-- Tags & Icon Row -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-slate-400 mb-1 text-xs">التقنيات (فصل بفاصلة)</label>
+                                <input type="text" id="project-tags" required
+                                    class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors"
+                                    placeholder="Python, Pandas">
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 mb-1 text-xs">الأيقونة</label>
+                                <select id="project-icon" class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors">
+                                    <option value="fa-solid fa-chart-line">📊 رسم بياني</option>
+                                    <option value="fa-solid fa-brain">🧠 دماغ</option>
+                                    <option value="fa-solid fa-robot">🤖 روبوت</option>
+                                    <option value="fa-solid fa-database">💾 قاعدة بيانات</option>
+                                    <option value="fa-solid fa-code">💻 كود</option>
+                                    <option value="fa-solid fa-globe">🌐 ويب</option>
+                                    <option value="fa-solid fa-mobile-screen">📱 موبايل</option>
+                                    <option value="fa-solid fa-lock">🔒 أمان</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="add-project-btn"
+                            class="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-3 rounded-lg shadow-lg shadow-green-500/20 transition-all flex justify-center items-center gap-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span id="add-btn-text">إضافة المشروع</span>
+                        </button>
+                    </form>
+
+                    <!-- Live Preview Column -->
+                    <div class="hidden md:block">
+                        <label class="block text-slate-400 mb-2 text-xs">معاينة مباشرة</label>
+                        <div id="live-preview" class="glass-card rounded-xl p-4 h-full min-h-[300px]">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="p-2 bg-green-500/10 rounded-lg">
+                                    <i id="preview-icon" class="fa-solid fa-chart-line text-xl text-green-400"></i>
+                                </div>
+                                <span id="preview-badge" class="text-[10px] bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Data Science</span>
+                            </div>
+                            <h3 id="preview-title" class="text-lg font-bold mb-2 text-white">عنوان المشروع</h3>
+                            <p id="preview-description" class="text-slate-400 text-xs mb-3 line-clamp-3">وصف المشروع سيظهر هنا...</p>
+                            <div id="preview-tags" class="flex flex-wrap gap-1">
+                                <span class="text-[10px] bg-slate-700 px-2 py-0.5 rounded">Python</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Project Modal -->
+    <div id="edit-project-modal" class="fixed inset-0 z-[200] hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" id="edit-modal-backdrop"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 overflow-y-auto">
+            <div class="glass rounded-2xl p-4 sm:p-6 w-full max-w-lg relative my-4 max-h-[90vh] overflow-y-auto">
+                <!-- Close Button -->
+                <button id="close-edit-modal-btn" class="absolute top-3 left-3 text-slate-400 hover:text-white transition-colors z-10">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+                
+                <h2 class="text-lg sm:text-xl font-bold mb-4 flex items-center gap-2">
+                    <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-pen text-blue-400 text-sm"></i>
+                    </div>
+                    تعديل المشروع
+                </h2>
+
+                <form id="edit-project-form" class="space-y-3">
+                    <input type="hidden" id="edit-project-id">
+                    
+                    <!-- Project Title -->
+                    <div>
+                        <label class="block text-slate-400 mb-1 text-xs">عنوان المشروع</label>
+                        <input type="text" id="edit-project-title" required
+                            class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors">
+                    </div>
+
+                    <!-- Project Description -->
+                    <div>
+                        <label class="block text-slate-400 mb-1 text-xs">وصف المشروع</label>
+                        <textarea id="edit-project-description" required rows="2"
+                            class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors resize-none"></textarea>
+                    </div>
+
+                    <!-- Project Link -->
+                    <div>
+                        <label class="block text-slate-400 mb-1 text-xs">رابط المشروع</label>
+                        <input type="url" id="edit-project-link" required
+                            class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors">
+                    </div>
+
+                    <!-- Category Selection -->
+                    <div>
+                        <label class="block text-slate-400 mb-2 text-xs">الفئة</label>
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="edit-category-option border border-white/10 rounded-lg p-2 text-center cursor-pointer transition-all hover:border-green-500" data-category="data-science">
+                                <i class="fa-solid fa-chart-line text-base sm:text-lg text-green-400"></i>
+                                <p class="text-[9px] sm:text-[10px] mt-1">Data Science</p>
+                            </div>
+                            <div class="edit-category-option border border-white/10 rounded-lg p-2 text-center cursor-pointer transition-all hover:border-yellow-500" data-category="ml">
+                                <i class="fa-solid fa-brain text-base sm:text-lg text-yellow-400"></i>
+                                <p class="text-[9px] sm:text-[10px] mt-1">ML</p>
+                            </div>
+                            <div class="edit-category-option border border-white/10 rounded-lg p-2 text-center cursor-pointer transition-all hover:border-purple-500" data-category="ai">
+                                <i class="fa-solid fa-robot text-base sm:text-lg text-purple-400"></i>
+                                <p class="text-[9px] sm:text-[10px] mt-1">AI</p>
+                            </div>
+                            <div class="edit-category-option border border-white/10 rounded-lg p-2 text-center cursor-pointer transition-all hover:border-cyan-500" data-category="web">
+                                <i class="fa-solid fa-globe text-base sm:text-lg text-cyan-400"></i>
+                                <p class="text-[9px] sm:text-[10px] mt-1">Web</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags & Icon Row -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-slate-400 mb-1 text-xs">التقنيات</label>
+                            <input type="text" id="edit-project-tags" required
+                                class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1 text-xs">الأيقونة</label>
+                            <select id="edit-project-icon" class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors">
+                                <option value="fa-solid fa-chart-line">📊 رسم بياني</option>
+                                <option value="fa-solid fa-brain">🧠 دماغ</option>
+                                <option value="fa-solid fa-robot">🤖 روبوت</option>
+                                <option value="fa-solid fa-database">💾 قاعدة بيانات</option>
+                                <option value="fa-solid fa-code">💻 كود</option>
+                                <option value="fa-solid fa-globe">🌐 ويب</option>
+                                <option value="fa-solid fa-mobile-screen">📱 موبايل</option>
+                                <option value="fa-solid fa-lock">🔒 أمان</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex gap-2 pt-2">
+                        <button type="button" onclick="closeEditModal()" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-medium py-2.5 rounded-lg transition-colors text-sm">
+                            إلغاء
+                        </button>
+                        <button type="submit" id="save-edit-btn"
+                            class="flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold py-2.5 rounded-lg shadow-lg transition-all flex justify-center items-center gap-2 text-sm">
+                            <i class="fa-solid fa-check"></i>
+                            حفظ التعديلات
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script type="module">
         // ------------------------------------------------
         // Firebase Configuration & Logic
         // ------------------------------------------------
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getDatabase, ref, push, onValue, serverTimestamp, update, remove, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         // ⚠️ استبدل البيانات التالية ببيانات مشروعك من Firebase Console
         const firebaseConfig = {
@@ -488,12 +864,282 @@
         };
 
         // Initialize Firebase
-        let app, db;
+        let app, db, auth;
+        window.currentUser = null;
+        
+        // Make Firebase functions available globally
+        window.firebaseRef = null;
+        window.firebaseRemove = null;
+        window.firebaseGet = null;
+        window.firebaseUpdate = null;
+        window.firebaseServerTimestamp = null;
+        
         try {
             app = initializeApp(firebaseConfig);
             db = getDatabase(app);
+            auth = getAuth(app);
+            
+            // Make Firebase functions available globally
+            window.firebaseDb = db;
+            window.firebaseRef = ref;
+            window.firebaseRemove = remove;
+            window.firebaseGet = get;
+            window.firebaseUpdate = update;
+            window.firebaseServerTimestamp = serverTimestamp;
+            
+            // Auth State Observer
+            onAuthStateChanged(auth, (user) => {
+                window.currentUser = user;
+                const addBtn = document.getElementById('add-project-nav-btn');
+                const addBtnMobile = document.getElementById('add-project-mobile-btn');
+                
+                if (user) {
+                    // Show add project button for logged in users (Desktop)
+                    addBtn.classList.remove('hidden');
+                    addBtn.classList.add('flex');
+                    
+                    // Show add project button for logged in users (Mobile)
+                    addBtnMobile.classList.remove('hidden');
+                    addBtnMobile.classList.add('flex');
+                    
+                    // Check if just logged in - show welcome message
+                    if (sessionStorage.getItem('justLoggedIn') === 'true') {
+                        sessionStorage.removeItem('justLoggedIn');
+                        showNotification('success', 'تم تسجيل الدخول!', 'أهلاً بك، يمكنك الآن إضافة المشاريع.');
+                    }
+                } else {
+                    addBtn.classList.add('hidden');
+                    addBtn.classList.remove('flex');
+                    addBtnMobile.classList.add('hidden');
+                    addBtnMobile.classList.remove('flex');
+                }
+            });
+            
+            // Load dynamic projects from Firebase
+            loadFirebaseProjects();
         } catch (error) {
             console.log("Firebase Config Placeholder - Please update with real keys");
+        }
+
+        // ------------------------------------------------
+        // Modal Logic
+        // ------------------------------------------------
+        const modal = document.getElementById('add-project-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const addProjectNavBtn = document.getElementById('add-project-nav-btn');
+        const addProjectMobileBtn = document.getElementById('add-project-mobile-btn');
+        let selectedCategory = '';
+
+        // Open Modal Function
+        function openAddModal() {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileBackdrop = document.getElementById('mobile-backdrop');
+            if (mobileMenu) {
+                mobileMenu.classList.add('translate-x-full');
+                mobileBackdrop.classList.add('hidden', 'opacity-0');
+            }
+        }
+
+        // Open Modal (Desktop)
+        addProjectNavBtn.addEventListener('click', openAddModal);
+
+        // Open Modal (Mobile)
+        addProjectMobileBtn.addEventListener('click', openAddModal);
+
+        // Close Modal
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+            document.getElementById('add-project-form').reset();
+            selectedCategory = '';
+            document.querySelectorAll('.category-option').forEach(o => {
+                o.classList.remove('selected', 'border-cyan-500', 'bg-cyan-500/10');
+            });
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', closeModal);
+
+        // ------------------------------------------------
+        // Live Preview System
+        // ------------------------------------------------
+        const categoryStyles = {
+            'data-science': { bg: 'bg-green-500/10', iconColor: 'text-green-400', badgeBg: 'bg-green-500/20', badgeText: 'text-green-400', label: 'Data Science' },
+            'ml': { bg: 'bg-yellow-500/10', iconColor: 'text-yellow-400', badgeBg: 'bg-yellow-500/20', badgeText: 'text-yellow-400', label: 'ML' },
+            'ai': { bg: 'bg-purple-500/10', iconColor: 'text-purple-400', badgeBg: 'bg-purple-500/20', badgeText: 'text-purple-400', label: 'AI' },
+            'web': { bg: 'bg-cyan-500/10', iconColor: 'text-cyan-400', badgeBg: 'bg-cyan-500/20', badgeText: 'text-cyan-400', label: 'Web' }
+        };
+
+        function updateLivePreview() {
+            const title = document.getElementById('project-title').value || 'عنوان المشروع';
+            const description = document.getElementById('project-description').value || 'وصف المشروع سيظهر هنا...';
+            const tags = document.getElementById('project-tags').value || 'Python';
+            const icon = document.getElementById('project-icon').value;
+            const cat = categoryStyles[selectedCategory] || categoryStyles['data-science'];
+
+            document.getElementById('preview-title').textContent = title;
+            document.getElementById('preview-description').textContent = description;
+            
+            // Update icon
+            const previewIcon = document.getElementById('preview-icon');
+            previewIcon.className = `${icon} text-xl ${cat.iconColor}`;
+            previewIcon.parentElement.className = `p-2 ${cat.bg} rounded-lg`;
+
+            // Update badge
+            const previewBadge = document.getElementById('preview-badge');
+            previewBadge.textContent = cat.label;
+            previewBadge.className = `text-[10px] ${cat.badgeBg} ${cat.badgeText} px-2 py-1 rounded-full`;
+
+            // Update tags
+            const tagsArray = tags.split(',').map(t => t.trim()).filter(t => t);
+            document.getElementById('preview-tags').innerHTML = tagsArray.map(tag => 
+                `<span class="text-[10px] bg-slate-700 px-2 py-0.5 rounded">${tag}</span>`
+            ).join('');
+        }
+
+        // Bind live preview events
+        document.getElementById('project-title').addEventListener('input', updateLivePreview);
+        document.getElementById('project-description').addEventListener('input', updateLivePreview);
+        document.getElementById('project-tags').addEventListener('input', updateLivePreview);
+        document.getElementById('project-icon').addEventListener('change', updateLivePreview);
+
+        // Category Selection
+        document.querySelectorAll('.category-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.category-option').forEach(o => {
+                    o.classList.remove('selected', 'border-cyan-500', 'bg-cyan-500/10');
+                });
+                option.classList.add('selected', 'border-cyan-500', 'bg-cyan-500/10');
+                selectedCategory = option.dataset.category;
+                document.getElementById('project-category').value = selectedCategory;
+                updateLivePreview();
+            });
+        });
+
+        // Add Project Form
+        document.getElementById('add-project-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!selectedCategory) {
+                showNotification('error', 'خطأ', 'يرجى اختيار فئة للمشروع');
+                return;
+            }
+
+            if (!window.currentUser) {
+                showNotification('error', 'خطأ', 'يجب تسجيل الدخول أولاً');
+                return;
+            }
+
+            const btn = document.getElementById('add-project-btn');
+            const btnText = document.getElementById('add-btn-text');
+            btn.disabled = true;
+            btnText.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin ml-2"></i> جاري الإضافة...';
+
+            try {
+                const projectsRef = ref(db, 'projects');
+                await push(projectsRef, {
+                    title: document.getElementById('project-title').value,
+                    description: document.getElementById('project-description').value,
+                    link: document.getElementById('project-link').value,
+                    category: selectedCategory,
+                    tags: document.getElementById('project-tags').value,
+                    icon: document.getElementById('project-icon').value,
+                    image: '',
+                    timestamp: serverTimestamp(),
+                    addedBy: window.currentUser.email
+                });
+
+                closeModal();
+                showNotification('success', 'تم بنجاح!', 'تمت إضافة المشروع بنجاح');
+
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('error', 'خطأ!', 'حدث خطأ أثناء إضافة المشروع. تأكد من صلاحيات Firebase.');
+            } finally {
+                btn.disabled = false;
+                btnText.innerHTML = 'إضافة المشروع';
+            }
+        });
+
+        // ------------------------------------------------
+        // Load Projects from Firebase
+        // ------------------------------------------------
+        function loadFirebaseProjects() {
+            const projectsRef = ref(db, 'projects');
+            onValue(projectsRef, (snapshot) => {
+                // Add to main projects grid
+                const mainGrid = document.getElementById('projects-grid');
+                if (!mainGrid) return;
+                
+                // Remove old firebase projects (keep static ones)
+                mainGrid.querySelectorAll('.firebase-project').forEach(el => el.remove());
+
+                if (!snapshot.exists()) return;
+
+                const categoryColors = {
+                    'data-science': { bg: 'bg-green-500/10', iconColor: 'text-green-400', badgeBg: 'bg-green-500/20', badgeText: 'text-green-400', label: 'Data Science' },
+                    'ml': { bg: 'bg-yellow-500/10', iconColor: 'text-yellow-400', badgeBg: 'bg-yellow-500/20', badgeText: 'text-yellow-400', label: 'ML' },
+                    'ai': { bg: 'bg-purple-500/10', iconColor: 'text-purple-400', badgeBg: 'bg-purple-500/20', badgeText: 'text-purple-400', label: 'AI' },
+                    'web': { bg: 'bg-cyan-500/10', iconColor: 'text-cyan-400', badgeBg: 'bg-cyan-500/20', badgeText: 'text-cyan-400', label: 'Web' }
+                };
+
+                snapshot.forEach((child) => {
+                    const project = child.val();
+                    const projectId = child.key;
+                    const cat = categoryColors[project.category] || categoryColors['data-science'];
+                    const tags = project.tags.split(',').map(t => t.trim()).filter(t => t);
+
+                    const projectCard = document.createElement('div');
+                    projectCard.className = 'project-card glass-card rounded-2xl overflow-hidden p-6 block firebase-project relative group';
+                    projectCard.dataset.category = project.category;
+                    projectCard.dataset.title = project.title;
+                    projectCard.dataset.tags = project.tags;
+                    projectCard.dataset.id = projectId;
+
+                    // Admin buttons (show only when logged in) - visible on mobile, hover on desktop
+                    const adminButtons = window.currentUser ? `
+                        <div class="absolute top-2 left-2 flex gap-1 sm:opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <button onclick="event.stopPropagation(); openEditProjectModal('${projectId}')" class="w-7 h-7 sm:w-8 sm:h-8 bg-blue-500/90 hover:bg-blue-600 rounded-lg flex items-center justify-center text-white text-xs transition-colors shadow-lg">
+                                <i class="fa-solid fa-pen text-[10px] sm:text-xs"></i>
+                            </button>
+                            <button onclick="event.stopPropagation(); deleteProject('${projectId}', '${project.title.replace(/'/g, "\\'")}')" class="w-7 h-7 sm:w-8 sm:h-8 bg-red-500/90 hover:bg-red-600 rounded-lg flex items-center justify-center text-white text-xs transition-colors shadow-lg">
+                                <i class="fa-solid fa-trash text-[10px] sm:text-xs"></i>
+                            </button>
+                        </div>
+                    ` : '';
+
+                    projectCard.innerHTML = `
+                        ${adminButtons}
+                        <a href="${project.link}" target="_blank" class="block">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="p-3 ${cat.bg} rounded-lg">
+                                    <i class="${project.icon} text-2xl ${cat.iconColor}"></i>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs ${cat.badgeBg} ${cat.badgeText} px-2 py-1 rounded-full">${cat.label}</span>
+                                </div>
+                            </div>
+                            ${project.image ? `<img src="${project.image}" alt="${project.title}" class="w-full h-32 object-cover rounded-lg mb-4">` : ''}
+                            <h3 class="text-xl font-bold mb-2">${project.title}</h3>
+                            <p class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">${project.description}</p>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                ${tags.map(tag => `<span class="text-xs bg-slate-700 px-2 py-1 rounded">${tag}</span>`).join('')}
+                            </div>
+                        </a>
+                    `;
+
+                    mainGrid.appendChild(projectCard);
+                });
+
+                // Re-apply filter after loading
+                if (typeof window.filterProjects === 'function') {
+                    window.filterProjects();
+                }
+            });
         }
 
         // ------------------------------------------------
@@ -513,6 +1159,12 @@
             } else if (type === 'error') {
                 toastIconContainer.className = 'w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center shrink-0';
                 toastIcon.className = 'fa-solid fa-xmark text-red-400 text-xl';
+            } else if (type === 'warning') {
+                toastIconContainer.className = 'w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center shrink-0';
+                toastIcon.className = 'fa-solid fa-triangle-exclamation text-yellow-400 text-xl';
+            } else if (type === 'info') {
+                toastIconContainer.className = 'w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center shrink-0';
+                toastIcon.className = 'fa-solid fa-circle-info text-cyan-400 text-xl';
             }
 
             // Set Content
@@ -624,6 +1276,117 @@
         });
 
         // ------------------------------------------------
+        // Projects Filter & Search Logic
+        // ------------------------------------------------
+        const searchInput = document.getElementById('search-input');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const noResults = document.getElementById('no-results');
+        const projectsGrid = document.getElementById('projects-grid');
+        
+        let currentCategory = 'all';
+
+        // Category Filter
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                categoryBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-cyan-500', 'text-white');
+                    b.classList.add('bg-slate-800/50', 'text-slate-300');
+                });
+                btn.classList.add('active', 'bg-cyan-500', 'text-white');
+                btn.classList.remove('bg-slate-800/50', 'text-slate-300');
+                
+                currentCategory = btn.dataset.category;
+                filterProjects();
+            });
+        });
+
+        // Search Filter + Easter Egg
+        searchInput.addEventListener('input', () => {
+            const searchValue = searchInput.value.trim();
+            
+            // Easter Egg: Secret Admin Access
+            if (searchValue === 'x-7458') {
+                window.location.href = 'admin.html';
+                return;
+            }
+            
+            filterProjects();
+        });
+
+        // Make filterProjects globally available for Firebase callback
+        window.filterProjects = filterProjects;
+
+        function filterProjects() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const projectCards = document.querySelectorAll('.project-card');
+            let visibleCount = 0;
+
+            projectCards.forEach(card => {
+                const cardCategory = card.dataset.category;
+                const cardTitle = card.dataset.title.toLowerCase();
+                const cardTags = card.dataset.tags.toLowerCase();
+                const cardText = card.querySelector('p').textContent.toLowerCase();
+
+                // Check category match
+                const categoryMatch = currentCategory === 'all' || cardCategory === currentCategory;
+                
+                // Check search match
+                const searchMatch = searchTerm === '' || 
+                    cardTitle.includes(searchTerm) || 
+                    cardTags.includes(searchTerm) ||
+                    cardText.includes(searchTerm);
+
+                if (categoryMatch && searchMatch) {
+                    card.style.display = 'block';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                    
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Hide all coming soon messages
+            document.getElementById('coming-soon-ai').classList.add('hidden');
+            document.getElementById('coming-soon-ml').classList.add('hidden');
+            document.getElementById('coming-soon-web').classList.add('hidden');
+            
+            // Check if category has no projects
+            const categoryProjects = document.querySelectorAll(`.project-card[data-category="${currentCategory}"]`);
+            const hasProjectsInCategory = currentCategory === 'all' || categoryProjects.length > 0;
+            
+            // Show coming soon for empty categories
+            if (currentCategory === 'ai' && visibleCount === 0) {
+                document.getElementById('coming-soon-ai').classList.remove('hidden');
+                noResults.classList.add('hidden');
+                projectsGrid.classList.add('hidden');
+            } else if (currentCategory === 'ml' && visibleCount === 0) {
+                document.getElementById('coming-soon-ml').classList.remove('hidden');
+                noResults.classList.add('hidden');
+                projectsGrid.classList.add('hidden');
+            } else if (currentCategory === 'web' && visibleCount === 0) {
+                document.getElementById('coming-soon-web').classList.remove('hidden');
+                noResults.classList.add('hidden');
+                projectsGrid.classList.add('hidden');
+            } else if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+                projectsGrid.classList.add('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                projectsGrid.classList.remove('hidden');
+            }
+        }
+
+        // ------------------------------------------------
         // Mobile Menu Logic
         // ------------------------------------------------
         const btn = document.getElementById('mobile-menu-btn');
@@ -730,6 +1493,142 @@
             }
             tick();
         }
+
+        // ------------------------------------------------
+        // Edit & Delete Project Functions
+        // ------------------------------------------------
+        
+        // Delete Project
+        window.deleteProject = async function(projectId, projectTitle) {
+            if (!window.currentUser) {
+                showNotification('error', 'خطأ', 'يجب تسجيل الدخول أولاً');
+                return;
+            }
+
+            // Confirm deletion
+            const confirmed = confirm(`هل أنت متأكد من حذف المشروع "${projectTitle}"؟`);
+            if (!confirmed) return;
+
+            try {
+                await window.firebaseRemove(window.firebaseRef(window.firebaseDb, `projects/${projectId}`));
+                showNotification('success', 'تم الحذف!', 'تم حذف المشروع بنجاح');
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('error', 'خطأ!', 'حدث خطأ أثناء حذف المشروع');
+            }
+        };
+
+        // Edit Project Modal Logic
+        let editSelectedCategory = '';
+        const editModal = document.getElementById('edit-project-modal');
+        const editModalBackdrop = document.getElementById('edit-modal-backdrop');
+        const closeEditModalBtn = document.getElementById('close-edit-modal-btn');
+        const editProjectForm = document.getElementById('edit-project-form');
+
+        // Open Edit Modal
+        window.openEditProjectModal = async function(projectId) {
+            if (!window.currentUser) {
+                showNotification('error', 'خطأ', 'يجب تسجيل الدخول أولاً');
+                return;
+            }
+
+            try {
+                const snapshot = await window.firebaseGet(window.firebaseRef(window.firebaseDb, `projects/${projectId}`));
+                if (!snapshot.exists()) {
+                    showNotification('error', 'خطأ', 'المشروع غير موجود');
+                    return;
+                }
+
+                const project = snapshot.val();
+
+                // Fill form
+                document.getElementById('edit-project-id').value = projectId;
+                document.getElementById('edit-project-title').value = project.title;
+                document.getElementById('edit-project-description').value = project.description;
+                document.getElementById('edit-project-link').value = project.link;
+                document.getElementById('edit-project-tags').value = project.tags;
+                document.getElementById('edit-project-icon').value = project.icon;
+
+                // Set category
+                editSelectedCategory = project.category;
+                document.querySelectorAll('.edit-category-option').forEach(o => {
+                    if (o.dataset.category === project.category) {
+                        o.classList.add('selected', 'border-cyan-500', 'bg-cyan-500/10');
+                    } else {
+                        o.classList.remove('selected', 'border-cyan-500', 'bg-cyan-500/10');
+                    }
+                });
+
+                // Show modal
+                editModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('error', 'خطأ!', 'حدث خطأ أثناء تحميل بيانات المشروع');
+            }
+        };
+
+        // Close Edit Modal
+        window.closeEditModal = function() {
+            editModal.classList.add('hidden');
+            document.body.style.overflow = '';
+            editProjectForm.reset();
+            editSelectedCategory = '';
+            document.querySelectorAll('.edit-category-option').forEach(o => {
+                o.classList.remove('selected', 'border-cyan-500', 'bg-cyan-500/10');
+            });
+        };
+
+        closeEditModalBtn.addEventListener('click', closeEditModal);
+        editModalBackdrop.addEventListener('click', closeEditModal);
+
+        // Edit Category Selection
+        document.querySelectorAll('.edit-category-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.edit-category-option').forEach(o => {
+                    o.classList.remove('selected', 'border-cyan-500', 'bg-cyan-500/10');
+                });
+                option.classList.add('selected', 'border-cyan-500', 'bg-cyan-500/10');
+                editSelectedCategory = option.dataset.category;
+            });
+        });
+
+        // Save Edit
+        editProjectForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!editSelectedCategory) {
+                showNotification('warning', 'تنبيه', 'يرجى اختيار فئة للمشروع');
+                return;
+            }
+
+            const btn = document.getElementById('save-edit-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> جاري الحفظ...';
+
+            try {
+                const projectId = document.getElementById('edit-project-id').value;
+
+                await window.firebaseUpdate(window.firebaseRef(window.firebaseDb, `projects/${projectId}`), {
+                    title: document.getElementById('edit-project-title').value,
+                    description: document.getElementById('edit-project-description').value,
+                    link: document.getElementById('edit-project-link').value,
+                    category: editSelectedCategory,
+                    tags: document.getElementById('edit-project-tags').value,
+                    icon: document.getElementById('edit-project-icon').value,
+                    updatedAt: window.firebaseServerTimestamp()
+                });
+
+                closeEditModal();
+                showNotification('success', 'تم بنجاح!', 'تم تحديث المشروع بنجاح');
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('error', 'خطأ!', 'حدث خطأ أثناء تحديث المشروع');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> حفظ التعديلات';
+            }
+        });
     </script>
 </body>
 </html>
