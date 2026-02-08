@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>لوحة الإدارة | تركي المطيري</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Tajawal) -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            min-height: 100vh;
+        }
+
+        .glass {
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 4px;
+        }
+
+        .input-field {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+        }
+
+        .category-option {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .category-option:hover {
+            transform: translateY(-2px);
+        }
+
+        .category-option.selected {
+            border-color: #38bdf8 !important;
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .image-preview {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .image-preview:hover {
+            border-color: #38bdf8;
+        }
+
+        .project-card-preview {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="text-white antialiased">
+
+    <!-- Login Section -->
+    <div id="login-section" class="min-h-screen flex items-center justify-center px-6 py-12">
+        <div class="glass rounded-3xl p-10 w-full max-w-md text-center">
+            <!-- Logo -->
+            <div class="mb-8">
+                <div class="w-20 h-20 mx-auto bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-cyan-500/30">
+                    <i class="fa-solid fa-shield-halved text-4xl text-white"></i>
+                </div>
+                <h1 class="text-2xl font-bold">لوحة <span class="text-gradient">الإدارة</span></h1>
+                <p class="text-slate-400 text-sm mt-2">تسجيل الدخول للوصول</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label class="block text-slate-400 mb-2 text-sm text-right">البريد الإلكتروني</label>
+                    <input type="email" id="login-email" required 
+                        class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none"
+                        placeholder="admin@example.com">
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-2 text-sm text-right">كلمة المرور</label>
+                    <div class="relative">
+                        <input type="password" id="login-password" required 
+                            class="input-field w-full rounded-xl px-4 py-3 pl-12 text-white focus:outline-none"
+                            placeholder="••••••••">
+                        <button type="button" id="toggle-password" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="login-error" class="hidden text-red-400 text-sm bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+                    <i class="fa-solid fa-circle-exclamation ml-2"></i>
+                    <span id="error-text">خطأ في تسجيل الدخول</span>
+                </div>
+
+                <button type="submit" id="login-btn" 
+                    class="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-cyan-500/20 transition-all transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                    <span id="login-btn-text">تسجيل الدخول</span>
+                    <i id="login-btn-icon" class="fa-solid fa-arrow-left"></i>
+                    <i id="login-btn-loader" class="fa-solid fa-circle-notch fa-spin hidden"></i>
+                </button>
+            </form>
+
+            <!-- Register Link -->
+            <div class="mt-6 pt-6 border-t border-white/10">
+                <p class="text-slate-400 text-sm">ليس لديك حساب؟</p>
+                <button id="show-register" class="text-cyan-400 hover:text-cyan-300 font-medium mt-1">
+                    إنشاء حساب جديد
+                </button>
+            </div>
+
+            <!-- Back to Site -->
+            <a href="projects.html" class="inline-flex items-center gap-2 text-slate-400 hover:text-white mt-6 text-sm">
+                <i class="fa-solid fa-arrow-right"></i>
+                العودة للموقع
+            </a>
+        </div>
+    </div>
+
+    <!-- Register Section -->
+    <div id="register-section" class="hidden min-h-screen flex items-center justify-center px-6 py-12">
+        <div class="glass rounded-3xl p-10 w-full max-w-md text-center">
+            <!-- Logo -->
+            <div class="mb-8">
+                <div class="w-20 h-20 mx-auto bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-4 shadow-lg shadow-purple-500/30">
+                    <i class="fa-solid fa-user-plus text-4xl text-white"></i>
+                </div>
+                <h1 class="text-2xl font-bold">إنشاء <span class="text-gradient">حساب</span></h1>
+                <p class="text-slate-400 text-sm mt-2">سجل للوصول للوحة الإدارة</p>
+            </div>
+
+            <!-- Register Form -->
+            <form id="register-form" class="space-y-5">
+                <div>
+                    <label class="block text-slate-400 mb-2 text-sm text-right">الاسم</label>
+                    <input type="text" id="register-name" required 
+                        class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none"
+                        placeholder="اسمك الكريم">
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-2 text-sm text-right">البريد الإلكتروني</label>
+                    <input type="email" id="register-email" required 
+                        class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none"
+                        placeholder="example@email.com">
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-2 text-sm text-right">كلمة المرور</label>
+                    <input type="password" id="register-password" required minlength="6"
+                        class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none"
+                        placeholder="6 أحرف على الأقل">
+                </div>
+
+                <!-- Error Message -->
+                <div id="register-error" class="hidden text-red-400 text-sm bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+                    <i class="fa-solid fa-circle-exclamation ml-2"></i>
+                    <span id="register-error-text">خطأ في التسجيل</span>
+                </div>
+
+                <button type="submit" id="register-btn" 
+                    class="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-purple-500/20 transition-all transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                    <span id="register-btn-text">إنشاء الحساب</span>
+                    <i id="register-btn-icon" class="fa-solid fa-user-check"></i>
+                    <i id="register-btn-loader" class="fa-solid fa-circle-notch fa-spin hidden"></i>
+                </button>
+            </form>
+
+            <!-- Back to Login -->
+            <div class="mt-6 pt-6 border-t border-white/10">
+                <button id="show-login" class="text-cyan-400 hover:text-cyan-300 font-medium">
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                    العودة لتسجيل الدخول
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-section" class="hidden min-h-screen">
+        <!-- Header -->
+        <header class="glass border-b border-white/10 sticky top-0 z-50">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-shield-halved text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold">لوحة الإدارة</h1>
+                        <p id="admin-email" class="text-xs text-slate-400">admin@example.com</p>
+                    </div>
+                </div>
+                <button id="logout-btn" class="flex items-center gap-2 text-slate-400 hover:text-red-400 transition-colors">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="hidden sm:inline">تسجيل الخروج</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-6 py-10">
+            <div class="grid lg:grid-cols-2 gap-10">
+                
+                <!-- Add Project Form -->
+                <div class="glass rounded-3xl p-8">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-plus text-green-400"></i>
+                        </div>
+                        إضافة مشروع جديد
+                    </h2>
+
+                    <form id="add-project-form" class="space-y-6">
+                        <!-- Project Title -->
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">عنوان المشروع</label>
+                            <input type="text" id="project-title" required
+                                class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none"
+                                placeholder="مثال: تحليل بيانات المبيعات">
+                        </div>
+
+                        <!-- Project Description -->
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">وصف المشروع</label>
+                            <textarea id="project-description" required rows="3"
+                                class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none resize-none"
+                                placeholder="وصف مختصر للمشروع..."></textarea>
+                        </div>
+
+                        <!-- Project Link -->
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">رابط المشروع (GitHub)</label>
+                            <input type="url" id="project-link" required
+                                class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none"
+                                placeholder="https://github.com/username/project">
+                        </div>
+
+                        <!-- Category Selection -->
+                        <div>
+                            <label class="block text-slate-400 mb-3 text-sm">الفئة</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <div class="category-option border border-white/10 rounded-xl p-4 text-center" data-category="data-science">
+                                    <i class="fa-solid fa-chart-line text-2xl text-green-400 mb-2"></i>
+                                    <p class="text-sm">Data Science</p>
+                                </div>
+                                <div class="category-option border border-white/10 rounded-xl p-4 text-center" data-category="ml">
+                                    <i class="fa-solid fa-brain text-2xl text-yellow-400 mb-2"></i>
+                                    <p class="text-sm">ML</p>
+                                </div>
+                                <div class="category-option border border-white/10 rounded-xl p-4 text-center" data-category="ai">
+                                    <i class="fa-solid fa-robot text-2xl text-purple-400 mb-2"></i>
+                                    <p class="text-sm">AI</p>
+                                </div>
+                                <div class="category-option border border-white/10 rounded-xl p-4 text-center" data-category="web">
+                                    <i class="fa-solid fa-globe text-2xl text-cyan-400 mb-2"></i>
+                                    <p class="text-sm">Web</p>
+                                </div>
+                            </div>
+                            <input type="hidden" id="project-category" required>
+                        </div>
+
+                        <!-- Tags -->
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">التقنيات المستخدمة (فصل بفاصلة)</label>
+                            <input type="text" id="project-tags" required
+                                class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none"
+                                placeholder="Python, Pandas, Matplotlib">
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">صورة المشروع (اختياري)</label>
+                            <div class="image-preview rounded-xl p-8 text-center cursor-pointer" id="image-drop-zone">
+                                <input type="file" id="project-image" accept="image/*" class="hidden">
+                                <div id="image-placeholder">
+                                    <i class="fa-solid fa-cloud-arrow-up text-4xl text-slate-500 mb-3"></i>
+                                    <p class="text-slate-400 text-sm">اضغط أو اسحب صورة هنا</p>
+                                </div>
+                                <img id="image-preview-img" src="" alt="" class="hidden max-h-40 mx-auto rounded-lg">
+                            </div>
+                        </div>
+
+                        <!-- Icon Selection -->
+                        <div>
+                            <label class="block text-slate-400 mb-2 text-sm">أيقونة المشروع</label>
+                            <select id="project-icon" class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none">
+                                <option value="fa-solid fa-chart-line">📊 رسم بياني</option>
+                                <option value="fa-solid fa-brain">🧠 دماغ</option>
+                                <option value="fa-solid fa-robot">🤖 روبوت</option>
+                                <option value="fa-solid fa-database">💾 قاعدة بيانات</option>
+                                <option value="fa-solid fa-code">💻 كود</option>
+                                <option value="fa-solid fa-globe">🌐 ويب</option>
+                                <option value="fa-solid fa-mobile-screen">📱 موبايل</option>
+                                <option value="fa-solid fa-lock">🔒 أمان</option>
+                                <option value="fa-solid fa-graduation-cap">🎓 تعليم</option>
+                                <option value="fa-solid fa-building-columns">🏛️ بنك</option>
+                            </select>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="add-project-btn"
+                            class="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-500/20 transition-all transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>إضافة المشروع</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Preview & Recent Projects -->
+                <div class="space-y-8">
+                    <!-- Live Preview -->
+                    <div class="glass rounded-3xl p-8">
+                        <h2 class="text-xl font-bold mb-6 flex items-center gap-3">
+                            <div class="w-10 h-10 bg-cyan-500/20 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-eye text-cyan-400"></i>
+                            </div>
+                            معاينة مباشرة
+                        </h2>
+
+                        <div id="project-preview" class="project-card-preview rounded-2xl p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="p-3 bg-green-500/10 rounded-lg">
+                                    <i id="preview-icon" class="fa-solid fa-chart-line text-2xl text-green-400"></i>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span id="preview-category-badge" class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full">Data Science</span>
+                                </div>
+                            </div>
+                            <h3 id="preview-title" class="text-xl font-bold mb-2">عنوان المشروع</h3>
+                            <p id="preview-description" class="text-slate-400 text-sm mb-4 h-16 overflow-hidden">
+                                وصف المشروع سيظهر هنا...
+                            </p>
+                            <div id="preview-tags" class="flex flex-wrap gap-2 mt-2">
+                                <span class="text-xs bg-slate-700 px-2 py-1 rounded">Python</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Projects -->
+                    <div class="glass rounded-3xl p-8">
+                        <h2 class="text-xl font-bold mb-6 flex items-center gap-3">
+                            <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-clock-rotate-left text-purple-400"></i>
+                            </div>
+                            المشاريع المضافة
+                        </h2>
+
+                        <div id="recent-projects" class="space-y-4 max-h-96 overflow-y-auto">
+                            <div class="text-center py-8 text-slate-500">
+                                <i class="fa-solid fa-folder-open text-4xl mb-3"></i>
+                                <p>لا توجد مشاريع مضافة بعد</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="fixed inset-0 z-[200] hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" id="edit-modal-backdrop"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 overflow-y-auto">
+            <div class="glass rounded-3xl p-8 w-full max-w-2xl relative my-8">
+                <!-- Close Button -->
+                <button id="close-edit-modal" class="absolute top-4 left-4 text-slate-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+                
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-pen-to-square text-blue-400"></i>
+                    </div>
+                    تعديل المشروع
+                </h2>
+
+                <form id="edit-project-form" class="space-y-5">
+                    <input type="hidden" id="edit-project-id">
+                    <input type="hidden" id="edit-project-old-image">
+                    
+                    <!-- Project Title -->
+                    <div>
+                        <label class="block text-slate-400 mb-2 text-sm">عنوان المشروع</label>
+                        <input type="text" id="edit-project-title" required
+                            class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none">
+                    </div>
+
+                    <!-- Project Description -->
+                    <div>
+                        <label class="block text-slate-400 mb-2 text-sm">وصف المشروع</label>
+                        <textarea id="edit-project-description" required rows="3"
+                            class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none resize-none"></textarea>
+                    </div>
+
+                    <!-- Project Link -->
+                    <div>
+                        <label class="block text-slate-400 mb-2 text-sm">رابط المشروع (GitHub)</label>
+                        <input type="url" id="edit-project-link" required
+                            class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none">
+                    </div>
+
+                    <!-- Category Selection -->
+                    <div>
+                        <label class="block text-slate-400 mb-3 text-sm">الفئة</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <div class="edit-category-option border border-white/10 rounded-xl p-3 text-center cursor-pointer transition-all hover:border-cyan-500" data-category="data-science">
+                                <i class="fa-solid fa-chart-line text-xl text-green-400 mb-1"></i>
+                                <p class="text-xs">Data Science</p>
+                            </div>
+                            <div class="edit-category-option border border-white/10 rounded-xl p-3 text-center cursor-pointer transition-all hover:border-cyan-500" data-category="ml">
+                                <i class="fa-solid fa-brain text-xl text-yellow-400 mb-1"></i>
+                                <p class="text-xs">ML</p>
+                            </div>
+                            <div class="edit-category-option border border-white/10 rounded-xl p-3 text-center cursor-pointer transition-all hover:border-cyan-500" data-category="ai">
+                                <i class="fa-solid fa-robot text-xl text-purple-400 mb-1"></i>
+                                <p class="text-xs">AI</p>
+                            </div>
+                            <div class="edit-category-option border border-white/10 rounded-xl p-3 text-center cursor-pointer transition-all hover:border-cyan-500" data-category="web">
+                                <i class="fa-solid fa-globe text-xl text-cyan-400 mb-1"></i>
+                                <p class="text-xs">Web</p>
+                            </div>
+                        </div>
+                        <input type="hidden" id="edit-project-category">
+                    </div>
+
+                    <!-- Tags -->
+                    <div>
+                        <label class="block text-slate-400 mb-2 text-sm">التقنيات المستخدمة</label>
+                        <input type="text" id="edit-project-tags" required
+                            class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none">
+                    </div>
+
+                    <!-- Icon Selection -->
+                    <div>
+                        <label class="block text-slate-400 mb-2 text-sm">أيقونة المشروع</label>
+                        <select id="edit-project-icon" class="input-field w-full rounded-xl px-4 py-3 text-white focus:outline-none">
+                            <option value="fa-solid fa-chart-line">📊 رسم بياني</option>
+                            <option value="fa-solid fa-brain">🧠 دماغ</option>
+                            <option value="fa-solid fa-robot">🤖 روبوت</option>
+                            <option value="fa-solid fa-database">💾 قاعدة بيانات</option>
+                            <option value="fa-solid fa-code">💻 كود</option>
+                            <option value="fa-solid fa-globe">🌐 ويب</option>
+                            <option value="fa-solid fa-mobile-screen">📱 موبايل</option>
+                            <option value="fa-solid fa-lock">🔒 أمان</option>
+                            <option value="fa-solid fa-graduation-cap">🎓 تعليم</option>
+                            <option value="fa-solid fa-building-columns">🏛️ بنك</option>
+                        </select>
+                    </div>
+
+                    <!-- Current Image Preview -->
+                    <div id="edit-current-image-container" class="hidden">
+                        <label class="block text-slate-400 mb-2 text-sm">الصورة الحالية</label>
+                        <div class="relative inline-block">
+                            <img id="edit-current-image" src="" alt="" class="h-24 rounded-lg border border-white/10">
+                            <button type="button" id="remove-current-image" class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs hover:bg-red-600">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- New Image Upload -->
+                    <div>
+                        <label class="block text-slate-400 mb-2 text-sm">تغيير الصورة (اختياري)</label>
+                        <div class="image-preview rounded-xl p-6 text-center cursor-pointer" id="edit-image-drop-zone">
+                            <input type="file" id="edit-project-image" accept="image/*" class="hidden">
+                            <div id="edit-image-placeholder">
+                                <i class="fa-solid fa-cloud-arrow-up text-3xl text-slate-500 mb-2"></i>
+                                <p class="text-slate-400 text-sm">اضغط لاختيار صورة جديدة</p>
+                            </div>
+                            <img id="edit-image-preview-img" src="" alt="" class="hidden max-h-32 mx-auto rounded-lg">
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex gap-4 pt-4">
+                        <button type="submit" id="save-edit-btn"
+                            class="flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold py-3 rounded-xl shadow-lg transition-all flex justify-center items-center gap-2">
+                            <i class="fa-solid fa-check"></i>
+                            <span>حفظ التعديلات</span>
+                        </button>
+                        <button type="button" id="cancel-edit-btn"
+                            class="px-6 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded-xl transition-all">
+                            إلغاء
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="success-toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4 px-6 py-4 bg-green-500/20 backdrop-blur-md border border-green-500/30 rounded-2xl shadow-2xl translate-y-32 opacity-0 transition-all duration-500 z-[300]">
+        <div class="w-10 h-10 rounded-full bg-green-500/30 flex items-center justify-center">
+            <i class="fa-solid fa-check text-green-400"></i>
+        </div>
+        <div>
+            <h4 class="font-bold text-white">تم بنجاح!</h4>
+            <p id="success-message" class="text-sm text-green-300">تمت إضافة المشروع</p>
+        </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div id="error-toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4 px-6 py-4 bg-red-500/20 backdrop-blur-md border border-red-500/30 rounded-2xl shadow-2xl translate-y-32 opacity-0 transition-all duration-500 z-[300]">
+        <div class="w-10 h-10 rounded-full bg-red-500/30 flex items-center justify-center">
+            <i class="fa-solid fa-xmark text-red-400"></i>
+        </div>
+        <div>
+            <h4 class="font-bold text-white">خطأ!</h4>
+            <p id="error-message" class="text-sm text-red-300">حدث خطأ</p>
+        </div>
+    </div>
+
+    <!-- Warning Toast -->
+    <div id="warning-toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4 px-6 py-4 bg-yellow-500/20 backdrop-blur-md border border-yellow-500/30 rounded-2xl shadow-2xl translate-y-32 opacity-0 transition-all duration-500 z-[300]">
+        <div class="w-10 h-10 rounded-full bg-yellow-500/30 flex items-center justify-center">
+            <i class="fa-solid fa-exclamation text-yellow-400"></i>
+        </div>
+        <div>
+            <h4 class="font-bold text-white">تنبيه!</h4>
+            <p id="warning-message" class="text-sm text-yellow-300">يرجى الانتباه</p>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getDatabase, ref, push, onValue, serverTimestamp, remove, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXdwMw9m8S0AGUsYY5wxcyT2lVF-udPMI",
+            authDomain: "portfolio-2aca4.firebaseapp.com",
+            databaseURL: "https://portfolio-2aca4-default-rtdb.firebaseio.com",
+            projectId: "portfolio-2aca4",
+            storageBucket: "portfolio-2aca4.firebasestorage.app",
+            messagingSenderId: "257395634614",
+            appId: "1:257395634614:web:2b27332e2527d5e5ced117",
+            measurementId: "G-0XJ5SD044W"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+        const storage = getStorage(app);
+
+        // DOM Elements
+        const loginSection = document.getElementById('login-section');
+        const registerSection = document.getElementById('register-section');
+        const adminSection = document.getElementById('admin-section');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const loginError = document.getElementById('login-error');
+        const registerError = document.getElementById('register-error');
+        const showRegisterBtn = document.getElementById('show-register');
+        const showLoginBtn = document.getElementById('show-login');
+        const logoutBtn = document.getElementById('logout-btn');
+        const adminEmail = document.getElementById('admin-email');
+
+        // Toggle Password Visibility
+        const togglePassword = document.getElementById('toggle-password');
+        const loginPassword = document.getElementById('login-password');
+        togglePassword.addEventListener('click', () => {
+            const type = loginPassword.type === 'password' ? 'text' : 'password';
+            loginPassword.type = type;
+            togglePassword.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>';
+        });
+
+        // Switch between Login & Register
+        showRegisterBtn.addEventListener('click', () => {
+            loginSection.classList.add('hidden');
+            registerSection.classList.remove('hidden');
+        });
+
+        showLoginBtn.addEventListener('click', () => {
+            registerSection.classList.add('hidden');
+            loginSection.classList.remove('hidden');
+        });
+
+        // Auth State Observer
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Check if just logged in (redirect to projects)
+                const justLoggedIn = sessionStorage.getItem('justLoggedIn');
+                if (justLoggedIn) {
+                    sessionStorage.removeItem('justLoggedIn');
+                    window.location.href = 'projects.html';
+                    return;
+                }
+                
+                loginSection.classList.add('hidden');
+                registerSection.classList.add('hidden');
+                adminSection.classList.remove('hidden');
+                adminEmail.textContent = user.email;
+                loadProjects();
+            } else {
+                loginSection.classList.remove('hidden');
+                adminSection.classList.add('hidden');
+            }
+        });
+
+        // Login
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const btn = document.getElementById('login-btn');
+            const btnText = document.getElementById('login-btn-text');
+            const btnIcon = document.getElementById('login-btn-icon');
+            const btnLoader = document.getElementById('login-btn-loader');
+
+            btn.disabled = true;
+            btnText.textContent = 'جاري الدخول...';
+            btnIcon.classList.add('hidden');
+            btnLoader.classList.remove('hidden');
+            loginError.classList.add('hidden');
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                sessionStorage.setItem('justLoggedIn', 'true');
+                // Redirect immediately to projects page
+                window.location.href = 'projects.html';
+            } catch (error) {
+                loginError.classList.remove('hidden');
+                document.getElementById('error-text').textContent = getErrorMessage(error.code);
+            } finally {
+                btn.disabled = false;
+                btnText.textContent = 'تسجيل الدخول';
+                btnIcon.classList.remove('hidden');
+                btnLoader.classList.add('hidden');
+            }
+        });
+
+        // Register
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const btn = document.getElementById('register-btn');
+            const btnText = document.getElementById('register-btn-text');
+            const btnIcon = document.getElementById('register-btn-icon');
+            const btnLoader = document.getElementById('register-btn-loader');
+
+            btn.disabled = true;
+            btnText.textContent = 'جاري الإنشاء...';
+            btnIcon.classList.add('hidden');
+            btnLoader.classList.remove('hidden');
+            registerError.classList.add('hidden');
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(userCredential.user, { displayName: name });
+                sessionStorage.setItem('justLoggedIn', 'true');
+                // Redirect immediately to projects page
+                window.location.href = 'projects.html';
+            } catch (error) {
+                registerError.classList.remove('hidden');
+                document.getElementById('register-error-text').textContent = getErrorMessage(error.code);
+            } finally {
+                btn.disabled = false;
+                btnText.textContent = 'إنشاء الحساب';
+                btnIcon.classList.remove('hidden');
+                btnLoader.classList.add('hidden');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            signOut(auth);
+        });
+
+        // Error Messages
+        function getErrorMessage(code) {
+            const messages = {
+                'auth/invalid-email': 'البريد الإلكتروني غير صحيح',
+                'auth/user-disabled': 'تم تعطيل هذا الحساب',
+                'auth/user-not-found': 'لا يوجد حساب بهذا البريد',
+                'auth/wrong-password': 'كلمة المرور غير صحيحة',
+                'auth/email-already-in-use': 'البريد مستخدم بالفعل',
+                'auth/weak-password': 'كلمة المرور ضعيفة جداً',
+                'auth/invalid-credential': 'بيانات الدخول غير صحيحة'
+            };
+            return messages[code] || 'حدث خطأ غير متوقع';
+        }
+
+        // ========================================
+        // Project Management
+        // ========================================
+        
+        let selectedCategory = '';
+        let selectedImage = null;
+
+        // Category Selection
+        const categoryOptions = document.querySelectorAll('.category-option');
+        categoryOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                categoryOptions.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedCategory = option.dataset.category;
+                document.getElementById('project-category').value = selectedCategory;
+                updatePreview();
+            });
+        });
+
+        // Image Upload
+        const imageDropZone = document.getElementById('image-drop-zone');
+        const imageInput = document.getElementById('project-image');
+        const imagePlaceholder = document.getElementById('image-placeholder');
+        const imagePreviewImg = document.getElementById('image-preview-img');
+
+        imageDropZone.addEventListener('click', () => imageInput.click());
+
+        imageDropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            imageDropZone.classList.add('border-cyan-500');
+        });
+
+        imageDropZone.addEventListener('dragleave', () => {
+            imageDropZone.classList.remove('border-cyan-500');
+        });
+
+        imageDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            imageDropZone.classList.remove('border-cyan-500');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleImageFile(files[0]);
+            }
+        });
+
+        imageInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleImageFile(e.target.files[0]);
+            }
+        });
+
+        function handleImageFile(file) {
+            if (!file.type.startsWith('image/')) return;
+            selectedImage = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreviewImg.src = e.target.result;
+                imagePreviewImg.classList.remove('hidden');
+                imagePlaceholder.classList.add('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Live Preview
+        const previewTitle = document.getElementById('preview-title');
+        const previewDescription = document.getElementById('preview-description');
+        const previewTags = document.getElementById('preview-tags');
+        const previewIcon = document.getElementById('preview-icon');
+        const previewCategoryBadge = document.getElementById('preview-category-badge');
+
+        document.getElementById('project-title').addEventListener('input', updatePreview);
+        document.getElementById('project-description').addEventListener('input', updatePreview);
+        document.getElementById('project-tags').addEventListener('input', updatePreview);
+        document.getElementById('project-icon').addEventListener('change', updatePreview);
+
+        function updatePreview() {
+            const title = document.getElementById('project-title').value || 'عنوان المشروع';
+            const description = document.getElementById('project-description').value || 'وصف المشروع سيظهر هنا...';
+            const tags = document.getElementById('project-tags').value.split(',').map(t => t.trim()).filter(t => t);
+            const icon = document.getElementById('project-icon').value;
+
+            previewTitle.textContent = title;
+            previewDescription.textContent = description;
+            previewIcon.className = icon + ' text-2xl';
+
+            // Update tags
+            previewTags.innerHTML = '';
+            if (tags.length === 0) {
+                tags.push('Python');
+            }
+            tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'text-xs bg-slate-700 px-2 py-1 rounded';
+                span.textContent = tag;
+                previewTags.appendChild(span);
+            });
+
+            // Update category badge
+            const categoryColors = {
+                'data-science': { bg: 'bg-green-500/20', text: 'text-green-400', label: 'Data Science', iconColor: 'text-green-400' },
+                'ml': { bg: 'bg-yellow-500/20', text: 'text-yellow-400', label: 'ML', iconColor: 'text-yellow-400' },
+                'ai': { bg: 'bg-purple-500/20', text: 'text-purple-400', label: 'AI', iconColor: 'text-purple-400' },
+                'web': { bg: 'bg-cyan-500/20', text: 'text-cyan-400', label: 'Web', iconColor: 'text-cyan-400' }
+            };
+
+            const cat = categoryColors[selectedCategory] || categoryColors['data-science'];
+            previewCategoryBadge.className = `text-xs ${cat.bg} ${cat.text} px-2 py-1 rounded-full`;
+            previewCategoryBadge.textContent = cat.label;
+            previewIcon.classList.remove('text-green-400', 'text-yellow-400', 'text-purple-400', 'text-cyan-400');
+            previewIcon.classList.add(cat.iconColor);
+        }
+
+        // Add Project
+        const addProjectForm = document.getElementById('add-project-form');
+        addProjectForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!selectedCategory) {
+                showWarningToast('يرجى اختيار فئة للمشروع');
+                return;
+            }
+
+            const btn = document.getElementById('add-project-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> جاري الإضافة...';
+
+            try {
+                let imageUrl = '';
+                
+                // Upload image if selected
+                if (selectedImage) {
+                    const imageRef = storageRef(storage, `projects/${Date.now()}_${selectedImage.name}`);
+                    await uploadBytes(imageRef, selectedImage);
+                    imageUrl = await getDownloadURL(imageRef);
+                }
+
+                // Add project to database
+                const projectsRef = ref(db, 'projects');
+                await push(projectsRef, {
+                    title: document.getElementById('project-title').value,
+                    description: document.getElementById('project-description').value,
+                    link: document.getElementById('project-link').value,
+                    category: selectedCategory,
+                    tags: document.getElementById('project-tags').value,
+                    icon: document.getElementById('project-icon').value,
+                    image: imageUrl,
+                    timestamp: serverTimestamp(),
+                    addedBy: auth.currentUser.email
+                });
+
+                // Reset form
+                addProjectForm.reset();
+                selectedCategory = '';
+                selectedImage = null;
+                categoryOptions.forEach(o => o.classList.remove('selected'));
+                imagePreviewImg.classList.add('hidden');
+                imagePlaceholder.classList.remove('hidden');
+                updatePreview();
+
+                // Show success
+                showSuccessToast('تمت إضافة المشروع بنجاح!');
+
+            } catch (error) {
+                console.error('Error:', error);
+                showErrorToast('حدث خطأ أثناء إضافة المشروع: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-plus"></i> إضافة المشروع';
+            }
+        });
+
+        // Load Projects
+        function loadProjects() {
+            const projectsRef = ref(db, 'projects');
+            onValue(projectsRef, (snapshot) => {
+                const container = document.getElementById('recent-projects');
+                container.innerHTML = '';
+
+                if (!snapshot.exists()) {
+                    container.innerHTML = `
+                        <div class="text-center py-8 text-slate-500">
+                            <i class="fa-solid fa-folder-open text-4xl mb-3"></i>
+                            <p>لا توجد مشاريع مضافة بعد</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const projects = [];
+                snapshot.forEach((child) => {
+                    projects.push({ id: child.key, ...child.val() });
+                });
+
+                projects.reverse().forEach(project => {
+                    const categoryColors = {
+                        'data-science': 'bg-green-500/20 text-green-400',
+                        'ml': 'bg-yellow-500/20 text-yellow-400',
+                        'ai': 'bg-purple-500/20 text-purple-400',
+                        'web': 'bg-cyan-500/20 text-cyan-400'
+                    };
+
+                    const div = document.createElement('div');
+                    div.className = 'flex items-center justify-between p-4 bg-slate-800/50 rounded-xl border border-white/5 hover:border-white/10 transition-all';
+                    div.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center">
+                                <i class="${project.icon} text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">${project.title}</h4>
+                                <span class="text-xs ${categoryColors[project.category] || 'bg-slate-500/20 text-slate-400'} px-2 py-0.5 rounded-full">${project.category}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button class="edit-project w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors flex items-center justify-center" data-id="${project.id}" title="تعديل">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button class="delete-project w-8 h-8 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors flex items-center justify-center" data-id="${project.id}" title="حذف">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+
+                // Edit handlers
+                document.querySelectorAll('.edit-project').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        const id = e.currentTarget.dataset.id;
+                        openEditModal(id);
+                    });
+                });
+
+                // Delete handlers
+                document.querySelectorAll('.delete-project').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        if (confirm('هل تريد حذف هذا المشروع؟')) {
+                            const id = e.currentTarget.dataset.id;
+                            await remove(ref(db, `projects/${id}`));
+                            showSuccessToast('تم حذف المشروع');
+                        }
+                    });
+                });
+            });
+        }
+
+        // Success Toast
+        function showSuccessToast(message) {
+            const toast = document.getElementById('success-toast');
+            document.getElementById('success-message').textContent = message;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3000);
+        }
+
+        // Error Toast
+        function showErrorToast(message) {
+            const toast = document.getElementById('error-toast');
+            document.getElementById('error-message').textContent = message;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 4000);
+        }
+
+        // Warning Toast
+        function showWarningToast(message) {
+            const toast = document.getElementById('warning-toast');
+            document.getElementById('warning-message').textContent = message;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3500);
+        }
+
+        // ========================================
+        // Edit Modal Logic
+        // ========================================
+        
+        const editModal = document.getElementById('edit-modal');
+        const editModalBackdrop = document.getElementById('edit-modal-backdrop');
+        const closeEditModalBtn = document.getElementById('close-edit-modal');
+        const cancelEditBtn = document.getElementById('cancel-edit-btn');
+        const editProjectForm = document.getElementById('edit-project-form');
+        let editSelectedCategory = '';
+        let editSelectedImage = null;
+        let removeCurrentImageFlag = false;
+
+        // Edit Category Selection
+        const editCategoryOptions = document.querySelectorAll('.edit-category-option');
+        editCategoryOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                editCategoryOptions.forEach(o => o.classList.remove('selected', 'border-cyan-500', 'bg-cyan-500/10'));
+                option.classList.add('selected', 'border-cyan-500', 'bg-cyan-500/10');
+                editSelectedCategory = option.dataset.category;
+                document.getElementById('edit-project-category').value = editSelectedCategory;
+            });
+        });
+
+        // Edit Image Upload
+        const editImageDropZone = document.getElementById('edit-image-drop-zone');
+        const editImageInput = document.getElementById('edit-project-image');
+        const editImagePlaceholder = document.getElementById('edit-image-placeholder');
+        const editImagePreviewImg = document.getElementById('edit-image-preview-img');
+
+        editImageDropZone.addEventListener('click', () => editImageInput.click());
+
+        editImageInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                if (!file.type.startsWith('image/')) return;
+                editSelectedImage = file;
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    editImagePreviewImg.src = ev.target.result;
+                    editImagePreviewImg.classList.remove('hidden');
+                    editImagePlaceholder.classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Remove current image button
+        document.getElementById('remove-current-image').addEventListener('click', () => {
+            document.getElementById('edit-current-image-container').classList.add('hidden');
+            document.getElementById('edit-project-old-image').value = '';
+            removeCurrentImageFlag = true;
+        });
+
+        // Close Modal
+        function closeEditModal() {
+            editModal.classList.add('hidden');
+            editProjectForm.reset();
+            editSelectedCategory = '';
+            editSelectedImage = null;
+            removeCurrentImageFlag = false;
+            editCategoryOptions.forEach(o => o.classList.remove('selected', 'border-cyan-500', 'bg-cyan-500/10'));
+            editImagePreviewImg.classList.add('hidden');
+            editImagePlaceholder.classList.remove('hidden');
+            document.getElementById('edit-current-image-container').classList.add('hidden');
+        }
+
+        closeEditModalBtn.addEventListener('click', closeEditModal);
+        cancelEditBtn.addEventListener('click', closeEditModal);
+        editModalBackdrop.addEventListener('click', closeEditModal);
+
+        // Open Edit Modal
+        async function openEditModal(projectId) {
+            const projectRef = ref(db, `projects/${projectId}`);
+            const snapshot = await get(projectRef);
+            
+            if (!snapshot.exists()) {
+                showErrorToast('المشروع غير موجود');
+                return;
+            }
+
+            const project = snapshot.val();
+            
+            // Fill form fields
+            document.getElementById('edit-project-id').value = projectId;
+            document.getElementById('edit-project-title').value = project.title;
+            document.getElementById('edit-project-description').value = project.description;
+            document.getElementById('edit-project-link').value = project.link;
+            document.getElementById('edit-project-tags').value = project.tags;
+            document.getElementById('edit-project-icon').value = project.icon;
+            document.getElementById('edit-project-category').value = project.category;
+            document.getElementById('edit-project-old-image').value = project.image || '';
+            
+            // Set category
+            editSelectedCategory = project.category;
+            editCategoryOptions.forEach(o => {
+                if (o.dataset.category === project.category) {
+                    o.classList.add('selected', 'border-cyan-500', 'bg-cyan-500/10');
+                } else {
+                    o.classList.remove('selected', 'border-cyan-500', 'bg-cyan-500/10');
+                }
+            });
+
+            // Show current image if exists
+            if (project.image) {
+                document.getElementById('edit-current-image').src = project.image;
+                document.getElementById('edit-current-image-container').classList.remove('hidden');
+            } else {
+                document.getElementById('edit-current-image-container').classList.add('hidden');
+            }
+
+            // Reset new image preview
+            editImagePreviewImg.classList.add('hidden');
+            editImagePlaceholder.classList.remove('hidden');
+            editSelectedImage = null;
+            removeCurrentImageFlag = false;
+
+            // Show modal
+            editModal.classList.remove('hidden');
+        }
+
+        // Save Edit
+        editProjectForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!editSelectedCategory) {
+                showWarningToast('يرجى اختيار فئة للمشروع');
+                return;
+            }
+
+            const btn = document.getElementById('save-edit-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> جاري الحفظ...';
+
+            try {
+                const projectId = document.getElementById('edit-project-id').value;
+                let imageUrl = document.getElementById('edit-project-old-image').value;
+                
+                // Upload new image if selected
+                if (editSelectedImage) {
+                    const imageRef = storageRef(storage, `projects/${Date.now()}_${editSelectedImage.name}`);
+                    await uploadBytes(imageRef, editSelectedImage);
+                    imageUrl = await getDownloadURL(imageRef);
+                } else if (removeCurrentImageFlag) {
+                    imageUrl = '';
+                }
+
+                // Update project in database
+                await update(ref(db, `projects/${projectId}`), {
+                    title: document.getElementById('edit-project-title').value,
+                    description: document.getElementById('edit-project-description').value,
+                    link: document.getElementById('edit-project-link').value,
+                    category: editSelectedCategory,
+                    tags: document.getElementById('edit-project-tags').value,
+                    icon: document.getElementById('edit-project-icon').value,
+                    image: imageUrl,
+                    updatedAt: serverTimestamp()
+                });
+
+                closeEditModal();
+                showSuccessToast('تم تحديث المشروع بنجاح!');
+
+            } catch (error) {
+                console.error('Error:', error);
+                showErrorToast('حدث خطأ أثناء تحديث المشروع: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> حفظ التعديلات';
+            }
+        });
+    </script>
+</body>
+</html>
